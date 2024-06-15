@@ -1,4 +1,16 @@
-##  Understanding JSX
+##  >single page Application vs multi page application.
+
+#### Singlepage Application
+1. after making any first req, it bring their html , css, js and whenever different req is made the only few components will reload of the page not full page. because now js have the full control which dynamically chg the data of the page on events or reqs.\
+2. saves the bandwidth.
+
+#### Multipage Application
+1. page reload in every req, because for every  req it will bring their respective html,css,js for every different req. ex - harry/about , harry/contact
+2. Bandwidth waste.
+
+ 
+
+##  >Understanding JSX
 
 1. JSX (JavaScript XML) is a syntax extension for JavaScript that allows you to write HTML-like code directly in your JavaScript files. It's commonly used in React to define the structure of UI components.
 2. Remember that JSX is not HTML; it gets compiled to JavaScript. Therefore, you can use JavaScript features directly within JSX to create dynamic and interactive UI components in React.
