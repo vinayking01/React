@@ -3,7 +3,7 @@
 
     (a) using npx - node package executer
     ```
-    1. command  -> npx create-react-app.
+    1. command  -> npx create-react-app myapp.
     2. it executes the package without installing on your computer .
     3. npx downloads and runs the package temporarily, avoiding permanent installation.
 
