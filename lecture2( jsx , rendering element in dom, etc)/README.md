@@ -10,11 +10,11 @@
 
  
 
-##  >Understanding JSX
+##  > Understanding JSX
 
-1. JSX (JavaScript XML) is a syntax extension for JavaScript that allows you to write HTML-like code directly in your JavaScript files. It's commonly used in React to define the structure of UI components.
-2. Remember that JSX is not HTML; it gets compiled to JavaScript. Therefore, you can use JavaScript features directly within JSX to create dynamic and interactive UI components in React.
-3. using jsx we got the functionality of using the expression, function call , conditional statement inside the HTML using jsx only , which we can't use in simple HTML file.
+    1. JSX (JavaScript XML) is a syntax extension for JavaScript that allows you to write HTML-like code directly in your JavaScript files. It's commonly used in React to define the structure of UI components.
+    2. Remember that JSX is not HTML; it gets compiled to JavaScript. Therefore, you can use JavaScript features directly within JSX to create dynamic and interactive UI components in React.
+    3. using jsx we got the functionality of using the expression, function call , conditional statement inside the HTML using jsx only , which we can't use in simple HTML file.
 
 2. ### Creating a Simple Component
     Open src/App.js (one of the component) in your project directory.
@@ -61,7 +61,7 @@
             }
         ```
 
-5. ### Import Export
+5. ### Import & Export in React
     A. 
     Default Export - A file can have only one default export.
     Default Import - When importing that default export you can use any name.
@@ -84,9 +84,19 @@
 
     C. Default & Named export import - whenever you export both named and default , it should be import in their manner.
 
-### Looping in React jsx
-    We don't have for loops in JSSX , so we have to use .map() methods for arrays looping.
-    
+6. ### Looping in React jsx
+    We don't have for loops in JSX , so we have to use .map() methods for any kind of looping.
+    React.js will complain if oyu don't pass key prop. The key attribute should be a unique identifier for each element in the list. This is often an ID from your data, or the index of the item if no unique identifier is available. It won't use it will result in inefficient rendering and state issues. 
+    ### Syntax 
+    ```
+    <ul>
+      {
+        f.map((currElem,index)=>{
+          return (<li key={index}>{currElem}</li>) 
+        })
+      }
+    </ul>
+    ```
 
 ## Imp Key Differences of JSX vs JS
 - Use className instead of class for specifying CSS classes in JSX.

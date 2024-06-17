@@ -5,6 +5,8 @@ function hello(){
   return "Function call made successfully";
 }
 
+const f = ["apple", "banana","grapes"]; //array
+
 function App() {
   return (
     <>
@@ -47,9 +49,21 @@ function App() {
 </nav>
     </div>
     <div>
-    <h3>Using jsx we can also inject the expression in HTML , function calling etc</h3>
+    <h3>2. Using jsx we can also inject the expression in HTML , function calling etc</h3>
     <p>Expression in HTML sum pf 5+8 ={5+8}</p>
     <p>function calling = {hello()}</p>
+    </div>
+
+    <div>
+    <h3>3. Looping in react</h3>
+      <ul>
+      {
+        f.map((currElem,index)=>{
+          return (<li key={index}>{currElem}</li>)  // during looping key is mandatory required for for unique identification
+        })
+      }
+
+      </ul>
     </div>
     </>
   );
