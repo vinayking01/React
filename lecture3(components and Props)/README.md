@@ -76,3 +76,36 @@
     };
 
     ```
+
+5. ## Passing JSX as Props in component
+    We can pass JSX as props in component
+    and same wat to access in component eg - props.greetings
+    ### syntax
+    ```
+    UserCard name="Bob" greetings={
+      <>
+      <p>Hello Bob ! Have wonderful day</p>
+      </>
+    } />
+    ```
+6. ## Passing JSX or simple text in Component body
+    yes we can pass the content in the component body also only when it has closing tag also . It can be accessed by Props.children inside the component.
+
+    ### Syntax
+    ```
+    const App = () => (
+    <>
+        <UserCard greetings={
+            <>
+            <p>Hello Bob! Have a wonderful day.</p>
+            </>
+        } 
+        />
+        <button>Contacts</button>
+    </>
+    );
+
+    Component.js
+
+    <h1> Props.children </h1> 
+    ```

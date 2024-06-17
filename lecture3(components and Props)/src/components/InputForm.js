@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Inputfrom(props) {
     return (
-        <div>
+        <>
             <div className="container">
                 <div className="mb-3">
                         <h1>{props.heading}</h1>
@@ -12,6 +12,6 @@ export default function Inputfrom(props) {
                 </div>
                 <button type="submit" className="btn btn-primary">Convert to uppercase</button>
             </div>
-        </div> 
+        </> 
             );
 }
