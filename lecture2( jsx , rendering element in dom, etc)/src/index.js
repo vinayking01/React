@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react';   // this is re
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';

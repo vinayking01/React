@@ -14,6 +14,7 @@
 
 1. JSX (JavaScript XML) is a syntax extension for JavaScript that allows you to write HTML-like code directly in your JavaScript files. It's commonly used in React to define the structure of UI components.
 2. Remember that JSX is not HTML; it gets compiled to JavaScript. Therefore, you can use JavaScript features directly within JSX to create dynamic and interactive UI components in React.
+3. using jsx we got the functionality of using the expression, function call , conditional statement inside the HTML using jsx only , which we can't use in simple HTML file.
 
 2. ### Creating a Simple Component
     Open src/App.js (one of the component) in your project directory.
@@ -59,6 +60,33 @@
             );
             }
         ```
+
+5. ### Import Export
+    A. 
+    Default Export - A file can have only one default export.
+    Default Import - When importing that default export you can use any name.
+
+    ### Syntax
+    ```
+    export default NetflixSeries;
+    import Series from '/AppComponent/NetflixSeries' or import NetflixSeries from '/AppComponent/NetflixSeries'
+    ```
+    B. Named Export - Name should be of same name of component you are exporting . one more advantage is it Can have multiple named export .
+    ### Syntax
+    ```
+    "Home.js"
+    export const NetflixSeries;
+    export const Footer;
+
+    "App.js"
+    import {NetflixSeries, Footer} from '/AppComponent/NetflixSeries' 
+    ```
+
+    C. Default & Named export import - whenever you export both named and default , it should be import in their manner.
+
+### Looping in React jsx
+    We don't have for loops in JSSX , so we have to use .map() methods for arrays looping.
+    
 
 ## Imp Key Differences of JSX vs JS
 - Use className instead of class for specifying CSS classes in JSX.

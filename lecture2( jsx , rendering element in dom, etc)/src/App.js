@@ -1,6 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 
+function hello(){
+  return "Function call made successfully";
+}
+
 function App() {
   return (
     <>
@@ -41,9 +45,11 @@ function App() {
     </div>
   </div>
 </nav>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
+    </div>
+    <div>
+    <h3>Using jsx we can also inject the expression in HTML , function calling etc</h3>
+    <p>Expression in HTML sum pf 5+8 ={5+8}</p>
+    <p>function calling = {hello()}</p>
     </div>
     </>
   );
