@@ -6,8 +6,12 @@ import './App.css';
 import Navbars  from './components/Navbar';
 import Inputform from './components/InputForm';
 import UserCard from './components/UserCard';
+import para from './para.module.css'  // module css imported
+
+
 
 function App() {
+  const colorChange = true;
   return (
    <>
    {/* 1. this is the navbar component imported */}
@@ -20,7 +24,7 @@ function App() {
     <div className="container my-3"></div>
     <Inputform heading="This is your Form kundli"/>
 
-    <h1> hello welcome</h1>
+    <h1 className='head1'> hello welcome</h1>
     <br /> <br />
 
     <h3> User details </h3>
@@ -30,13 +34,25 @@ function App() {
     (B) passing content or jsx in component body during calling which can be accessed only by props.children inside the children */}
     <UserCard name="Bob" age={30} greetings={
       <>
-      <p>Hello Bob ! Have wonderful day</p>
+      <p >Hello Bob ! Have wonderful day</p>
       </>
     } >
-    <button>Contacts</button> 
+    <button  style={{backgroundColor : 'blue', fontSize : "20px", color: "white"}}>Contacts</button> 
     </UserCard>  {/* we called the component with different types of props along with one props passed as JSX and passing something in their body  will it work? No for accessing this you should use the children in component for accessing */}
+    
+    <button style={{
+      color: "white",
+      backgroundColor : `${colorChange ? "black" : "red"}`
+    }}> Btn color chg from red to black if it is true</button>
+   
+    <h1>2. Css Modules</h1>
+    <div>
+      <p className={`${para.paragraph}  ${para.shadow}`}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae, laboriosam!</p>
+    </div>
 
+    <div>
 
+    </div>
    </>
    
   );

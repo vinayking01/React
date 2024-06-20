@@ -1,0 +1,10 @@
+.paragraph {
+font-size: x-large;
+background-color: green;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.shadow{
+    border: 2px solid black;
+    text-shadow: 2px solid red;
+}

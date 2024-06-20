@@ -8,7 +8,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
+    <p> this is the last package</p>
+    <h1 className='head1'>Outer heading</h1>
   </React.StrictMode>
+  
 );
 
 // If you want to start measuring performance in your app, pass a function
