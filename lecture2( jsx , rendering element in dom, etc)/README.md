@@ -15,6 +15,7 @@
     1. JSX (JavaScript XML) is a syntax extension for JavaScript that allows you to write HTML-like code directly in your JavaScript files. It's commonly used in React to define the structure of UI components.
     2. Remember that JSX is not HTML; it gets compiled to JavaScript. Therefore, you can use JavaScript features directly within JSX to create dynamic and interactive UI components in React.
     3. using jsx we got the functionality of using the expression, function call , conditional statement inside the HTML using jsx only , which we can't use in simple HTML file.
+    4. Every expression in jsx should be wrapped inside the curly braces.  The outer pair of curly braces {} is used to denote a JavaScript expression within JSX. This allows you to write JavaScript code inside JSX, such as variables, functions, or object literals.
 
 2. ### Creating a Simple Component
     Open src/App.js (one of the component) in your project directory.
