@@ -7,7 +7,12 @@ import Navbars  from './components/Navbar';
 import Inputform from './components/InputForm';
 import UserCard from './components/UserCard';
 import para from './para.module.css'  // module css imported
+import styled from 'styled-components';
 
+const Container = styled.div`
+  font-size: 24px;
+  color : green;
+`;
 
 
 function App() {
@@ -50,9 +55,10 @@ function App() {
       <p className={`${para.paragraph}  ${para.shadow}`}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae, laboriosam!</p>
     </div>
 
-    <div>
-
-    </div>
+    <h2>Styled component css</h2>
+    <Container>
+      <h4>This is the module</h4>
+    </Container>
    </>
    
   );

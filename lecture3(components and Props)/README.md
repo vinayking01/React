@@ -176,7 +176,18 @@
 
 ## Styled Components
 1. npm install styled-components
-2. 
+2. You can create styled components by using the styled object provided by the library. Each styled component is essentially a React component with styles applied to it.
+
+    ## Syntax
+    ```
+    import styled from 'styled-components';
+
+    const Container = styled.div`
+    font-size: 24px;
+    color : green;
+    `;
+
+    ```
 
 # Note  Important - 
 1. When you import a regular CSS  file or anything in a component, its styles are applied globally, affecting all matching elements throughout the entire application. This includes from the parent which import to all the elements, sibling, and other components. The only solution of this issue is using "css module(in case of css )" so that it scopes bound only to the component which imported.
