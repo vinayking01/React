@@ -6,7 +6,7 @@ function hello(){
 }
 
 const f = ["apple", "banana","grapes"]; //array
-
+const numbers = [1, 2, 3, 4, 5];
 function App() {
   return (
     <>

@@ -88,12 +88,14 @@
 6. ### Looping in React jsx
     We don't have for loops in JSX , so we have to use .map() methods for any kind of looping.
     React.js will complain if oyu don't pass key prop. The key attribute should be a unique identifier for each element in the list. This is often an ID from your data, or the index of the item if no unique identifier is available. It won't use it will result in inefficient rendering and state issues. 
+
+    In React, you can use the map function directly inside JSX without storing its result in a variable. React handles the rendering of the elements returned by map using return statement.
     ### Syntax 
     ```
     <ul>
       {
         f.map((currElem,index)=>{
-          return (<li key={index}>{currElem}</li>) 
+         return  (<li key={index}>{currElem}</li>) 
         })
       }
     </ul>
