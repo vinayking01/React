@@ -24,15 +24,21 @@
 
     ## (a) State 
     In React, State is a way to store and manage data that can be change over the lifetime of  a component. when the state changes react re-renders the component to reflect the new state.
-    ## (B) Use State() Function 
+    ## (B) Hook
+    Hooks are functions that let you "hook into" React state and lifecycle features from function components. They enable you to use state and other React features without writing a class.
+    eg - useState()
+    ### (B) Use State() Function 
     It actually return an array of two items, current state value and a function to update that value.
     
 ## Note How rendering works?
 1. Initial Renders - when the app component first renders, React renders the Parent , sibling and all child components.
 2. State Change in parent Component - React will render Parent component and all child component except the sibling component. (koi bhi parent copmponent ke andar ki state chg krte hai toh pura copmonent with child component dubara new state ke sath re - render hoga .)
 
-# * Derived State in react
+# * Derived State Concept in react
 Derived State is any state that can be computed based on other state or props. It is not necessarily required the the result of computation in state but it is calculated when needed. 
 If the data you are storing is the type of array or object then you can use all the basic computation methods as available in js this is the concept of Derived state from the state in React.
 
 ex - const userCount = user.length ;
+
+# * Lifting the State Up Concept in React
+1. Lifting State Up is a pattern in React where you move the state from child components to a common parent component so that multiple child components can share and synchronize this state. This use case occurs when you want to pass data from one child component to other child component. This is one of the way to resolve this issue. We will see more in future about this.
