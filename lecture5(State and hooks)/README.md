@@ -32,7 +32,8 @@
     
 ## Note How rendering works?
 1. Initial Renders - when the app component first renders, React renders the Parent , sibling and all child components.
-2. State Change in parent Component - React will render Parent component and all child component except the sibling component. (koi bhi parent copmponent ke andar ki state chg krte hai toh pura copmonent with child component dubara new state ke sath re - render hoga .)
+2. State Change in parent Component - React will render Parent component and all child component except the sibling component. (koi bhi parent component ke andar ki state chg krte hai toh pura component with child component dubara new state ke sath re - render hoga .)
+3. State change in Child Component - if state chg in child component then it will re-render all there descendents only. Even parent component will also not re-render.
 
 # * Derived State Concept in react
 Derived State is any state that can be computed based on other state or props. It is not necessarily required the the result of computation in state but it is calculated when needed. 
