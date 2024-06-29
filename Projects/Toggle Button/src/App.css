@@ -1,0 +1,54 @@
+:root{
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.Container{
+border: 2px solid black;
+padding: 10px 10px;
+}
+
+.outerBox{
+  display: flex;
+  border: 2px solid black;
+  width: 220px;
+  margin: auto;
+  height: 100px;
+  padding: 10px 20px;
+  align-items: center;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+}
+
+.innerBox{
+  display: flex;
+  border: 8px solid rgb(255, 251, 251);
+  justify-content: center;
+  height:40px;
+  width: 40px;
+  padding: 20px 20px;
+  align-items: center;
+  border-radius: 100%;
+  transition: all 0.3s;
+  background-color: red;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+}
+
+.On{
+  transform: translateX(130px);
+  background-color: green;
+  -webkit-transform: translateX(130px);
+  -moz-transform: translateX(130px);
+  -ms-transform: translateX(130px);
+  -o-transform: translateX(130px);
+}
