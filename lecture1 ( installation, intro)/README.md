@@ -10,10 +10,12 @@
     ```
     (b) using npm -
     ```
-    1. command - npm create react-app my-app.
+    1. command - npm create react-app my-app. 
     2.  it downloads the packages
     ```
     Note - using another way is package bundler vite ,etc. 
+    vite - # Create a new Vite project
+            npm create vite@latest
 
 ### Reactjs / React
 
