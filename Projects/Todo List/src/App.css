@@ -1,0 +1,33 @@
+.OuterContainer{
+    border: 3px solid white;
+    width: 400px;
+    min-height: 600px;
+    margin: auto;
+    padding: 10px 10px;
+}
+
+form{
+ border: 2px solid black;
+ display:grid;
+ grid-template-columns: 3fr 1fr;
+ height: 50px;
+ overflow: hidden;
+ border-radius: 20px 20px;
+ -webkit-border-radius: 20px 20px;
+ -moz-border-radius: 20px 20px;
+ -ms-border-radius: 20px 20px;
+ -o-border-radius: 20px 20px;
+
+
+}
+
+.input{
+    
+    & input{
+        width: 100%;
+        height: 100%;
+        font-weight: 300;
+        font-size: medium;
+    }
+    
+}

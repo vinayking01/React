@@ -1,0 +1,9 @@
+:root{
+    box-sizing: border-box;
+    background-color: black;
+}
+
+p{
+    font-size: medium;
+    font-weight: 500;
+}
