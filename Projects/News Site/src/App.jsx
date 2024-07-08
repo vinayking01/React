@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { NavBar } from './Components/NavBar'
 import News from './Components/News';
 
+
+
 export default class App extends Component {
 
   render() {
@@ -10,7 +12,7 @@ export default class App extends Component {
       <div>
       <NavBar />
 
-      <News pageSize={18} />
+      <News pageSize={18} country="in" category="entertainment"/>
       </div>
       
       </>

@@ -1,11 +1,23 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
 import SpinnerBar from './spinner'
+import propTypes from 'prop-types'
 
 export default class News extends Component {
 
-  article = []
+  static defaultProps = {   // Setting default props,  they are usually created in this way in class based component . Using the static keyword in a class allows you to define properties and methods that are attached to the class itself rather than instances of the class.  
+    country : "in",
+    pageSize : 10,
+    category : "general"
 
+  }
+
+  static propTypes = {   // defining default props types 
+    country : propTypes.string,
+    pageSize : propTypes.number,
+    category : propTypes.string
+  }
+  
   constructor() {
     super();
     this.title = ""
@@ -25,7 +37,7 @@ export default class News extends Component {
     this.setState(
       {loading : true}
     )
-    let url = `https://newsapi.org/v2/everything?q=bitcoin&apiKey=5bf1f835549b4f3c808574d460f6c8ea&page=${this.page}&pageSize=${this.props.pageSize}`
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=5bf1f835549b4f3c808574d460f6c8ea&page=${this.page}&pageSize=${this.props.pageSize}`
     let data = await fetch(url);
     let parsedData = await data.json();
     this.setState(
@@ -42,7 +54,7 @@ export default class News extends Component {
   handleNextClick = async () => {
 
       console.log(this.state.page); // Correctly accesses state variable 'page'
-      let url = `https://newsapi.org/v2/everything?q=bitcoin&apiKey=5bf1f835549b4f3c808574d460f6c8ea&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+      let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=5bf1f835549b4f3c808574d460f6c8ea&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
       this.setState(
         {loading : true}
       )
@@ -66,7 +78,7 @@ export default class News extends Component {
       this.setState(
         {loading : true}
       )
-      let url = `https://newsapi.org/v2/everything?q=bitcoin&apiKey=5bf1f835549b4f3c808574d460f6c8ea&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
+      let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=5bf1f835549b4f3c808574d460f6c8ea&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
       let data = await fetch(url);
       let parsedData = await data.json();
       console.log(parsedData.articles);
