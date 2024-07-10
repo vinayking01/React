@@ -21,7 +21,7 @@ constructor()
       <div className='card-body'>
         <h5 className='card-title'>{(title.length < 45)?title:`${title}....`}</h5>
         <p className='card-text'>{(desc.length < 80)?desc:`${desc}....`}</p>
-        <p className='card-text'> <small className='tet-muted ' style={{fontStyle:"italic"}}>`By {author}  on {date}`</small> </p>
+        <p className='card-text'> <small className='tet-muted ' style={{fontStyle:"italic", color:"grey"}}>`By {author}  on {date}`</small> </p>
         <a href={newsUrl} className='btn btn-sm btn-primary' target='_blank'>Read More</a>
       </div>
       </div>
