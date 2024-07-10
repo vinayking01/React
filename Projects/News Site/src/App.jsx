@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { NavBar } from './Components/NavBar'
-import News from './Components/News';
-
+import { Outlet } from 'react-router-dom' 
 
 
 export default class App extends Component {
@@ -11,10 +10,8 @@ export default class App extends Component {
       <>
       <div>
       <NavBar />
-
-      <News pageSize={18} country="in" category="entertainment"/>
+      <Outlet /> 
       </div>
-      
       </>
     );
   }

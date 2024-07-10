@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
 import SpinnerBar from './spinner'
-import propTypes from 'prop-types'
+import propTypes, { elementType } from 'prop-types'
 
 export default class News extends Component {
 
@@ -100,7 +100,7 @@ export default class News extends Component {
         <div className='row '>
           {this.state.articles.map((element) => {
             return <div key={element.url} className='col-md-4'>
-              <NewsItem title={element.title ? element.title.slice(0, 35) : ""} desc={element.description ? element.description.slice(0, 80) : ""} newsUrl={element.url ? element.url : this.defaultUrl} imageUrl={(element.urlToImage) ? element.urlToImage : "https://i.kinja-img.com/image/upload/c_fill,h_675,pg_1,q_80,w_1200/0a80377f57c1762eeb4bbf3372850af5.jpg"} />
+              <NewsItem title={element.title ? element.title.slice(0, 35) : ""} desc={element.description ? element.description.slice(0, 80) : ""} newsUrl={element.url ? element.url : this.defaultUrl} imageUrl={(element.urlToImage) ? element.urlToImage : "https://i.kinja-img.com/image/upload/c_fill,h_675,pg_1,q_80,w_1200/0a80377f57c1762eeb4bbf3372850af5.jpg"} author={(!element.author) ? "Unknown" :element.author} date={(new Date(element.publishedAt)).toGMTString()} source={element.source.name} />
             </div>
           })}
         </div>

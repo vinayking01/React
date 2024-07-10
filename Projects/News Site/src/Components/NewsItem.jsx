@@ -9,15 +9,20 @@ constructor()
 }
   render() {
     // eslint-disable-next-line react/prop-types, no-unused-vars
-    let {title, desc, imageUrl, newsUrl} = this.props
+    let {title, desc, imageUrl, newsUrl, author, date, source} = this.props
     return (
       <div className="d-flex justify-content-center">
-      <div className='card' style={{width:"18rem"}}>
+      <div className='card position-relative' style={{width:"18rem"}}>
+      <span className="position-absolute translate-middle badge rounded-pill bg-danger" style={{top: '0%', left: '90%', zIndex:"1"}}>
+    {source}
+    <span className="visually-hidden">unread messages</span>
+  </span>
       <img src={imageUrl} alt="" className='card-img-top'  />
       <div className='card-body'>
         <h5 className='card-title'>{(title.length < 45)?title:`${title}....`}</h5>
         <p className='card-text'>{(desc.length < 80)?desc:`${desc}....`}</p>
-        <a href={newsUrl} className='btn btn-sm btn-primary' target='_blank'>Go somewhere</a>
+        <p className='card-text'> <small className='tet-muted ' style={{fontStyle:"italic"}}>`By {author}  on {date}`</small> </p>
+        <a href={newsUrl} className='btn btn-sm btn-primary' target='_blank'>Read More</a>
       </div>
       </div>
       </div>

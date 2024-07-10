@@ -1,8 +1,9 @@
+import { Link, NavLink } from 'react-router-dom'; 
 
 export function NavBar() {
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary bg-black">
   <div className="container-fluid">
     <a className="navbar-brand" href="#">Exclusive Post</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,16 +11,13 @@ export function NavBar() {
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-        <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li className="nav-item"> <a href="#" className="nav-link active" aria-current="page" >Business</a></li> 
-        <li className="nav-item"> <a href="#" className="nav-link active" aria-current="page" >Entertainment</a></li> 
-        <li className="nav-item"> <a href="#" className="nav-link active" aria-current="page" >General</a></li> 
-        <li className="nav-item"> <a href="#" className="nav-link active" aria-current="page" >Health</a></li> 
-        <li className="nav-item"> <a href="#" className="nav-link active" aria-current="page" >Science</a></li> 
-        <li className="nav-item"> <a href="#" className="nav-link active" aria-current="page" >Sports</a></li> 
-        <li className="nav-item"> <a href="#" className="nav-link active" aria-current="page" >Technology</a></li> 
+        <li className="nav-item"> <Link className="nav-link active" aria-current="page" to="/" >General</Link></li>
+        <li className="nav-item"> <Link className="nav-link active" aria-current="page" to="/business" >Business</Link></li> 
+        <li className="nav-item"> <Link className="nav-link active" aria-current="page" to="/entertainment" >Entertainment</Link></li> 
+        <li className="nav-item"> <Link className="nav-link active" aria-current="page" to="/health" >Health</Link></li> 
+        <li className="nav-item"> <Link className="nav-link active" aria-current="page" to="/science" >Science</Link></li> 
+        <li className="nav-item"> <Link className="nav-link active" aria-current="page" to="/sports" >Sports</Link></li> 
+        <li className="nav-item"> <Link className="nav-link active" aria-current="page" to="/technology" >Technology</Link></li> 
       </ul>
       <form className="d-flex" role="search">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
