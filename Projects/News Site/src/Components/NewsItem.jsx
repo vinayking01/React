@@ -13,7 +13,7 @@ constructor()
     return (
       <div className="d-flex justify-content-center">
       <div className='card position-relative' style={{width:"18rem"}}>
-      <span className="position-absolute translate-middle badge rounded-pill bg-danger" style={{top: '0%', left: '90%', zIndex:"1"}}>
+      <span className="position-absolute badge rounded-pill bg-danger" style={{top: "0%", right: "0%", zIndex:1}}>
     {source}
     <span className="visually-hidden">unread messages</span>
   </span>

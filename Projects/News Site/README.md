@@ -4,6 +4,11 @@
 
 1. Fetching Data from News API
 2. Spinner during loading 
+3. Infinite Scrolling 
+4. Loading bar progress at the top  
+5. Defining Environment variable is little different here which require different prefix settings .
+
+
 
 
 
