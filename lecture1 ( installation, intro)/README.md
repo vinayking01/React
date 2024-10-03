@@ -16,6 +16,8 @@
     Note - using another way is package bundler vite ,etc. 
     vite - # Create a new Vite project
             npm create vite@latest
+    
+    to Run the the project - npm start
 
 ### Reactjs / React
 
