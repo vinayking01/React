@@ -24,7 +24,7 @@ export  function UseEffect_hook() {
     },[count])
 
     useEffect(()=>{
-        console.log("hello 4")  // even if i don't render it will run only single time and also if i don't change the value of count2 it will run on single time
+        console.log("hello 4")  // even if i don't render it will run only single time and also if i don't change the value of count2, it will run  single time
     },[count2])
 
     return (
