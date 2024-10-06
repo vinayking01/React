@@ -18,6 +18,30 @@
 
 ## (a) Passing Events as Props
 1. Passing event handlers as props in React.js is a common pattern used to allow child components to communicate with parent components.
+```
+- parent.jsx
+
+function Click_btn()
+{
+  console.log("clicked");
+  alert("Hey , You increased by 1 again")
+}
+
+<div>
+      <h2>Events passed as props</h2>
+      <MyButton YourBtn={Click_btn} btn_number={5}/>
+</div>
+
+```
+```
+- child.jsx
+
+return (
+        <>
+            <button onClick={props.YourBtn}>Click on Btn {props.btn_number}</button>
+        </>
+    )
+```
 
 ## (B) Event Propogation
 1. Event propagation in React follows the same principles as in the DOM, consisting of three phases:
