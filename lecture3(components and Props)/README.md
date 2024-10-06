@@ -193,4 +193,46 @@
 1. When you import a regular CSS  file or anything in a component, its styles are applied globally, affecting all matching elements throughout the entire application. This includes from the parent which import to all the elements, sibling, and other components. The only solution of this issue is using "css module(in case of css )" so that it scopes bound only to the component which imported.
 
 
+## * Important Interview Question
 
+### Question1  - What will be the output in this case ?
+```
+const [count, setCount] = useState(0);
+
+const handleClick = () => {
+  setCount(count + 1); // First update
+  setCount(count + 1); // Second update, still using the original count value
+  setCount(count + 1); // Third update, still using the original count value
+};
+
+output - it will render the count value as 1 only,and only renders single time on the page.
+```
+Isn't it is interesting why it happened ?
+In React, when you call multiple setState or setCount updates for the same variable within the same event (like a button click), here's what happens:
+1. Batching:
+React batches these multiple state updates together to optimize performance, instead of applying each one immediately. These updates are scheduled but not yet applied to the component's state or re-rendered on the screen.
+2. Single Re-render 
+React does not re-render the component after each setState call. Instead, it waits until all the updates in that event handler are complete and then performs one re-render with the final state value.
+3. Using Stale state
+Since React hasn't actually applied the updates yet, all setState calls reference the original value when the event started.
+4. Final State update
+The last scheduled update (the last setState call) will determine the final value of the state. After batching all the updates, React will take the last state update and apply that to the component, causing a single re-render with the new state.
+
+#### - Overall summary 
+A stale value is an outdated state value that does not reflect the current state of the component during updates. In above case of example the SetState passed on batch of queue , it starts processing every update State but stale value reference to the initial value till the component is rendered again with updated value ( multiple setState or setCount updates for the same variable within the same event (like a button click)).
+This issue can be resolved with the help of "functional update form"
+
+#### Solution of problem 
+When you use the functional update form of setState in React (such as setCount(prevCount => prevCount + 1)), it does not update the stale value; instead, it operates on the latest available state value at the time of processing the queued updates.  Meaning when we use this method it uses the latest value updated during the batch processing not after fully batch processed. 
+```
+const handleClick = () => {
+  setCount(prevCount => prevCount + 1); // This will always use the most recent count
+  setCount(prevCount => prevCount + 1); // Uses the updated count from the previous line
+  setCount(prevCount => prevCount + 1); // Uses the updated count from the previous line
+};
+
+```
+1. When you call setCount with a function, you're passing a callback that takes the previous state as an argument (e.g., prevCount).
+2. This callback will receive the latest state value whenever React processes that update.
+3. Each time React processes the updates, it retrieves the most recent value of the state and passes it to your callback function.
+4. at last when all processed , the function completed rendering will happen now with the latest last updated in the value. 
