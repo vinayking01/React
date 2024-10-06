@@ -100,6 +100,30 @@
       }
     </ul>
     ```
+7. ### Short-circuit Evaluation In ReactJs
+    ```
+    short-circuit evaluation refers to a behavior where logical expressions are evaluated from left to right, and the evaluation stops as soon as the result is determined without needing to evaluate the entire expression.
+
+    Short-circuit evaluation in JSX refers to a pattern used to conditionally render elements based on a logical expression, primarily using the && (AND) or || (OR) operators.
+    
+    How It Works:
+    
+    - && (Logical AND): If the condition on the left side evaluates to true, the right side will be rendered. and if left is false , the left will be returned.
+
+    example  - 
+    console.log(true && "Continue");  // Output: "Continue" (left side is true, so right side is returned)
+    console.log(false && "Continue"); // Output: false (left side is false, so right side is ignored)
+
+
+    - || (Logical OR): If the condition on the left side evaluates to false, the right side will be rendered. if left side is true, then left will be returned. 
+
+    example-
+    console.log(true || "Fallback");   // Output: true (left side is true, so right side is ignored)
+    console.log(false || "Fallback");  // Output: "Fallback" (left side is false, so right side is used)
+    
+    This pattern is useful for conditional rendering without needing a full if statement or ternary operator.
+
+    ```
 
 ## Imp Key Differences of JSX vs JS
 - Use className instead of class for specifying CSS classes in JSX.
@@ -125,3 +149,17 @@
 1. React elements are immutable. Once you create an element, you can’t change its children or attributes. 
 2. In React, changing the properties of elements is typically done through state and props rather than directly modifying the elements themselves. which is only dynamically.( We will see in next lectures the PROPS and State)
 
+## React Rendering
+it actually has 3 thing virtual dom, Reconciliation, diff algorithm for differentiation between virtual and actual dom.
+(A)Trigger (State/Props Change)
+(B)(Create New Virtual DOM)
+(C)Reconciliation (Diff Virtual DOMs) - The process of comparing the new virtual DOM with the previous virtual DOM to determine what has changed.
+(D)Re-render Update (Apply Changes to Real DOM) - after that function called again return jsx as based on update Dom, and new paint(rendering) done in browser page
+
+When a component is re-rendered in React, it follows a similar process as the initial rendering:
+
+1. The component’s render method is called again, which returns a new JSX representation of the component’s output.
+2. React converts the new JSX into a new React element.
+3. React then creates a new virtual representation of the component’s output.
+4. React compares the new virtual representation with the previous virtual representation to determine the minimum number of changes required to update the actual DOM.
+5. React updates the necessary parts of the actual DOM based on the changes identified in the previous step.
