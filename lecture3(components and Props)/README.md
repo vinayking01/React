@@ -82,32 +82,44 @@
     and same wat to access in component eg - props.greetings
     ### syntax
     ```
-    UserCard name="Bob" greetings={
+    < UserCard name="Bob" greetings={
       <>
       <p>Hello Bob ! Have wonderful day</p>
       </>
     } />
     ```
-## > Passing JSX or simple text in Component body
-    yes we can pass the content in the component body also only when it has closing tag also . It can be accessed by Props.children inside the component.
+## > Additional feature "Understanding props.children" - Passing JSX or simple content in Component body not as props instead in between enclosing tag
+   This concept of passing jsx or other content (This content can be any JSX element, including HTML elements, other React components, strings, or even functions. ) in react in between enclosing tags ( component function body)
+    After passing in child component we can access it with " props.children ".
+   - What are children?
+   In React, children refers specifically to the content that you place between the opening and closing tags of component
 
     ### Syntax
     ```
-    const App = () => (
-    <>
-        <UserCard greetings={
-            <>
-            <p>Hello Bob! Have a wonderful day.</p>
-            </>
-        } 
-        />
-        <button>Contacts</button>
-    </>
+    parent.jsx
+
+    const ParentComponent = () => {
+    return (
+        <div>
+        <ChildComponent name="John">
+            <p>This is a child element</p>
+            <button>Click Me</button>
+        </ChildComponent>
+        </div>
+    );
+    };
+
+    - child.jsx
+
+    const ChildComponent = (props) => {
+    return (
+        <div>
+        <h2>Child Component {props.name}</h2>
+        {/* Accessing the children passed into the component */}
+        {props.children}
+        </div>
     );
 
-    Component.js
-
-    <h1> Props.children </h1> 
     ```
 
 ## Types of CSS in React
@@ -161,17 +173,30 @@
     ```
 
 ## CSS Modules 
-1. Every time you import  a css file they are regarded as global css.
-2. CSS modules helps you to keep styles specific to component they're being used in.
+1. Every time you import  a css file they are regarded as global css (which is limitation of using regular css in React).CSS modules helps you to keep styles specific to component they're being used in.
+2. CSS modules allow you to scope your styles locally to the component, preventing them from affecting other components.
 3. Rules - 
-    1.1. Name your CSS files with the .module.css extension (e.g., styles.module.css).
+    1.1. Name your CSS files with the .module.css extension (e.g., styles1.module.css).
     1.2 Access class names as properties of the imported styled object.
     1.3 Combine multiple class names as template literals.
 
     ## syntax
     ```
-      import para from './para.module.css' // importing   
-      <p className={`${para.paragraph}  ${para.shadow}`}> - //this way we use the module css
+    /* File: ChildComponent.module.css */
+    .paragraph {
+    color: blue;
+    font-size: 18px;
+    }
+
+
+    /* File: ParentComponent.jsx */
+    import React from 'react';
+    import styles from './ChildComponent.module.css'; // Import the CSS module
+
+    const latin_para = () => {
+    return <p className={styles.paragraph}>This is a paragraph in the child component.</p>;
+    };
+
     ```
 
 ## Styled Components
@@ -190,8 +215,8 @@
     ```
 
 # Note  Important - 
-1. When you import a regular CSS  file or anything in a component, its styles are applied globally, affecting all matching elements throughout the entire application. This includes from the parent which import to all the elements, sibling, and other components. The only solution of this issue is using "css module(in case of css )" so that it scopes bound only to the component which imported.
-
+1. When you import a regular CSS (like styles.css) file or anything in a component (App.jsx), those styles are added to the global scope of your application. This means they are available to all components within that application. those styles which you imported are applied to all the parents, elements, sibling, and other components. 
+2. To resolve the issue of global styles affecting unwanted elements in your react application you should use "css modules"
 
 ## * Important Interview Question
 
