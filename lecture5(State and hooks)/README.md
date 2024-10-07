@@ -43,3 +43,14 @@ ex - const userCount = user.length ;
 
 # * Lifting the State Up Concept in React
 1. Lifting State Up is a pattern in React where you move the state from child components to a common parent component so that multiple child components can share and synchronize this state. This use case occurs when you want to pass data from one child component to other child component. This is one of the way to resolve this issue. We will see more in future about this.
+
+
+## Very Important Concept - How flow execution go in React -
+1. Initial Render: When a React component first loads, it renders the UI based on the initial state.
+2. Hooks Execution: After the initial render, React runs all the hooks in the component. For example, useState initializes state, and useEffect sets up any side effects.
+3. State Changes: If you change the state (like with setState), it triggers a re-render of the component.
+4. Re-render: During this re-render, the UI updates based on the new state.
+5. Hooks Re-execution: All hooks are executed again in the same order, reflecting the latest state.
+6. Effect Execution: After the re-render, useEffect runs again to handle any side effects.
+7. Cycle Continues: This cycle continues: render the UI, execute hooks, change state, re-render, and repeat.
+
