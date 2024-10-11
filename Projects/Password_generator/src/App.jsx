@@ -12,8 +12,20 @@ function App() {
   const passwordGenerator =  useCallback(() =>{
     let pass = ""
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    if(numberAllowed) str+= "0123456789"
-    if(characterAllowed) str+= "#$%^&*@?"
+    let numberStr = "0123456789";
+    let specialCharStr = "#$%^&*@?";
+  
+    if (numberAllowed) str += numberStr;
+    if (characterAllowed) str += specialCharStr;
+  
+    // Ensure at least one character from each selected set
+    if (numberAllowed) {
+      pass += numberStr.charAt(Math.floor(Math.random() * numberStr.length));
+    }
+    if (characterAllowed) {
+      pass += specialCharStr.charAt(Math.floor(Math.random() * specialCharStr.length));
+    }
+  
     
     for(let i =1 ; i<=length ; i++)
     {
