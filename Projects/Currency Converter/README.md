@@ -1,7 +1,7 @@
 # Features Of currency Converter
 
 1. Convert to the 100+ currency 
-2. Swap the currency
+2. Swap the currency 
 
 Screenshot
 3. ![image](https://github.com/user-attachments/assets/8fd94040-4053-4ba8-894c-1330fd259447)
