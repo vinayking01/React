@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react"
-import {PokemonCard} from "../PokemonCard"
+import {PokemonCard} from "./PokemonCard"
 import  "./index.css";
 
 export function Pokemon(){
@@ -41,9 +41,10 @@ export function Pokemon(){
 
     // Applying the searching functionality  - giving the data according to search
     const SearchPokemon = Pokemon.filter((curPokemon)=>{
+        // console.log("nam",curPokemon)
         return curPokemon.name.toLowerCase().includes(search.toLowerCase())
     });
-    console.log(SearchPokemon)
+    // console.log(SearchPokemon)
     
   
     // if loading is going on
