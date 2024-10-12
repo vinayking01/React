@@ -8,6 +8,7 @@ const UseMemo_hook = (({name,totalmarks,totalsubject})=>{
   const [count, setCount] = useState(0);
 
     console.log("First inner component")
+    
     const Marks = useMemo(() =>{
       console.log("Percentage changes Rendering")
       return ((totalmarks*100)/500);
@@ -35,4 +36,4 @@ const UseMemo_hook = (({name,totalmarks,totalsubject})=>{
         </>
       );
 })
-export default memo(UseMemo_hook);
+export default (UseMemo_hook);

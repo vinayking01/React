@@ -1,28 +1,28 @@
-import React, { useState, useCallback, memo } from 'react';
+import React, { useState } from 'react';
 
-// Define the Percentage component and memoize it
-const Percentage = ({ totalmarks, onButtonClick }) => {
-  const Per = (totalmarks * 100) / 500;
-  console.log("rerendering Percentage component");
+const ChildComponent = ({ onIncrement, onReset, count }) => {
+  console.log("ChildComponent rendered");
+  
   return (
-    <>
-      <h3>My percentage: {Per}</h3>
-    </>
+    <div>
+      <h2>Current Count: {count}</h2>
+      <button onClick={onIncrement}>Increment</button>
+      <button onClick={onReset}>Reset</button>
+    </div>
   );
 };
 
-// Define the parent component using the useCallback hook
-const  UseCallBack_Hook = () => {
-  const [totalmarks, setTotalmarks] = useState(450);
+const UseCallBack_Hook = () => {
+  const [count, setCount] = useState(0);
 
-  const handleClick = memo(useCallback(() => {
-    console.log('Button clicked');
-  }, [])); // No dependencies, so the function is memoized and doesn't change
+  // No useCallback, so new function instances are created on every render
+  const increment = () => setCount((prev) => prev + 1);
+  const reset = () => setCount(0);
 
   return (
     <div>
-      <Percentage totalmarks={totalmarks} onButtonClick={handleClick} />
-      <button onClick={() => setTotalmarks(totalmarks + 10)}>Increase Marks</button>
+      <h1>Counter: {count}</h1>
+      <ChildComponent onIncrement={increment} onReset={reset} count={count} />
     </div>
   );
 };

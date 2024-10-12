@@ -9,7 +9,7 @@ export function UseReducer_hook() {
     function reducer(state,action) {
         switch(action.type)
         {
-            case "INCREMENT" : return {count : state.count +1};
+            case "INCREMENT" : return {count : state.count +1}; //  When you return { count: state.count - 1 } from the reducer function in your useReducer hook, this new object is passed back into the useReducer hook, which automatically stores it as the new state.
             case "DECREMENT" : return {count : state.count -1};
             default:
       throw new Error();
@@ -22,7 +22,7 @@ export function UseReducer_hook() {
     <>
         <div>
           <p>{state.count}</p>
-          <button onClick={() => dispatch({type : "INCREMENT"})}>Increment</button>
+          <button onClick={() => dispatch({type : "INCREMENT"})}  >Increment</button>  
           <button onClick={() => dispatch({type : "DECREMENT"})}>Decrement</button>
           <div>
         </div>

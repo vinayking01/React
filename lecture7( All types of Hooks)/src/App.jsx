@@ -12,11 +12,11 @@ import { useCustom_created } from './customHook/UseCustom_hook'
 import {React, state, useEffect, useState} from 'react'
 
 function App() {
-  const [name,setName] = useCustom_created('username','')
+  // const [name,setName] = useCustom_created('username','')
   
-  const onHandler = (event)=>{
-    setName(event.target.value)
-  }
+  // const onHandler = (event)=>{
+  //   setName(event.target.value)
+  // }
   console.log("Jai aur veru")
   return (
     <>
@@ -42,14 +42,10 @@ function App() {
       {/* <UseMemo_hook name="Abhi1" totalmarks={490} totalsubject={5}/> */}
 
       {/* UseCallback Hook */}
-      {/* <UseCallBack_Hook /> */}
+      <UseCallBack_Hook />
 
       {/* UseCustom Hook */}
-      <div>
-        <input type="text" value={name} onChange={onHandler}/>
-        <h2>Hello {name}</h2>
-        <button type="button">click me</button>
-      </div>
+      
     </>
   )
 }

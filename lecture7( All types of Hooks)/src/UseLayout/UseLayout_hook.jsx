@@ -1,36 +1,24 @@
-import { useState, useLayoutEffect, useEffect } from "react";
+import { useState, useLayoutEffect, useEffect, useRef } from "react";
+
 
 export function UseLayout_hook() {
-    const [count, UpdateValue] = useState(0);
+  const [width, setWidth] = useState(0);
+  const divRef = useRef(null);
 
-     const update =()=>{
-        UpdateValue(count+1);
-        console.log(count)
-     }
-    
-     useEffect(()=>{
-        console.log("Second Layout")
-    },[])
+  // useLayoutEffect runs synchronously after DOM changes but before painting
+  useLayoutEffect(() => {
+    if (divRef.current) {
+      // Measure the width of the div and set it in the state
+      setWidth(divRef.current.offsetWidth);
+    }
+  });
 
-
-    useEffect(() => {
-        console.log("First Layout")
-    },[])
-
-
-    useEffect(()=>{
-        console.log("third Layout")
-    },[])
-
-    return (
-    <>
-        <div>
-          <p>{count}</p>
-          <button type="button" onClick={update}>Click Here</button>
-          <div>
-        </div>
-        </div>
-    </>
+  return (
+    <div>
+      <div ref={divRef} style={{ width: "100%" }}>
+        This div has a width of {width}px.
+      </div>
+    </div>
   );
-
 }
+

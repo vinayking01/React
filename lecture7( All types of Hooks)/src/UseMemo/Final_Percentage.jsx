@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-export default memo(function Percentage({ totalmarks }) {
+export default (function Percentage({ totalmarks }) {
   const Per = (totalmarks * 100) / 500;
   console.log("component re-renders");
   return (
