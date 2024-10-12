@@ -1,5 +1,5 @@
 
-import { Link, NavLink } from 'react-router-dom';  // you can use anyone link or Navlink but there is Navlink has one additional advantage is we can perform the styling 
+import { Link, NavLink } from 'react-router-dom';  // you can use anyone either link or Navlink but there is Navlink has one additional advantage is we can perform the styling 
 
 export default function Navbar() {
     return (

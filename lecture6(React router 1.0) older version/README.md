@@ -65,18 +65,25 @@
     ```
 
 ### Important Point 
-1. We wrap our content first with <BrowserRouter>.
+1. We wrap our content first with "BrowserRouter".
 
-2. Then we define our <Routes>. An application can have multiple <Routes>. Our basic example only uses one.
+2. Then we define our "Routes". An application can have multiple "Route". Our basic example only uses one.
 
-3. <Route>s can be nested. The first <Route> has a path of / and renders the Layout component.
+3. "Route" can be nested. The first "Route" has a path of '/' and renders the Layout component.
 
-4. The nested <Route>s inherit and add to the parent route. So the blogs path is combined with the parent and becomes /blogs.
+4. The nested "Route" inherit and add to the parent route. So the blogs path is combined with the parent and becomes /blogs.
 
-5. The Home component route does not have a path but has an index attribute. That specifies this route as the default route for the parent route, which is /.
+5. The Home component route does not have a path but has an "index" attribute. That specifies this route as the default route for the parent route, which is '/'.
 
-6. Setting the path to * will act as a catch-all for any undefined URLs. This is great for a 404 error page.
+6. Setting the path to '*' will act as a catch-all for any undefined URLs. This is great for handling 404 error page.
 
-7. The <Outlet> renders the current route selected.
+7. The "Outlet" renders the current route selected.
 
-Anytime we link to an internal path, we will use <Link> instead of <a href="">.
+
+---
+-- Anytime we link to an path, we will use "Link" with routes to handle navigation instead of anchor tag " a href=""  " as it won't work .
+
+```
+-React Router’s <Link> component is designed for client-side routing, which enables seamless navigation without full-page reloads. whereas when you use <a></a> it reloads the page.
+-Routes are necessary for <Link> to function because they define what component should render when a specific path is visited.
+```
