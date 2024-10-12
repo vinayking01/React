@@ -3,7 +3,7 @@
 2. Hooks can only be called at the top level of a component.
 3. Hooks cannot be conditional.
 4. Component name should be in pascal case.
-5. Don't call Hooks inside loops , conditions, or nested functions.
+5. Don't call Hooks inside loops , conditions, or nested functions .
 
 ## UseState()  hooks
 1. The React useState Hook allows us to track state in a function component.
