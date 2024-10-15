@@ -36,12 +36,54 @@ useEffect(() => {
 - Consume context: Only the 3rd child component will consume the context.
 2. It can be used together with the useState Hook to share state between deeply nested components more easily than with useState alone.
 3. The one major need of this hook is if require a props of parent to be used in any deeply nested children then we have to pass it across all the children as props then, we can only able to use it. this  is known as 'prop drilling'. Prop drilling refers to the process of passing data from a parent component down to child components through props, even if some of those intermediate child components don't actually need the data. This happens when you need to pass data from a parent component to a deeply nested child component but all the intermediate components must still pass the prop along the chain.
-3. the issue of prop drilling is later resolved by use context feature.
- 
+4. the issue of prop drilling is later resolved by use context feature.
+5.  Other than use context there is also other library present in the internet like redux, redux toolkit for react and other framework.
+
 
 ## UseRef() hook
-1. Accessing the Items of DOM elements.
+1. Accessing the Items of DOM elements. we can add a ref attribute to an element to access it directly in the DOM.
+```
+function App() {
+  const inputElement = useRef();
+
+  const focusInput = () => {
+    inputElement.current.focus();
+  };
+
+  return (
+    <>
+      <input type="text" ref={inputElement} style ={}/>
+      <button onClick={focusInput}>Focus Input</button>
+    </>
+  );
+}
+```
+
+
 2. Persisting the Mutable value without re-rendering.
+```
+function App() {
+  const [inputValue, setInputValue] = useState("");
+  const count = useRef(0);
+
+  useEffect(() => {
+    count.current = count.current + 1;
+  });
+
+  return (
+    <>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+      <h1>Render Count: {count.current}</h1>
+    </>
+  );
+}
+```
+
+3. The useRef Hook can also be used to keep track of previous state values.
 
 ## UseReducer()  Hook
 1. The useReducer Hook is similar to the useState Hook.It allows for custom state logic.If you find yourself keeping track of multiple pieces of state that rely on complex logic, useReducer may be useful.
