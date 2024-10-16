@@ -73,5 +73,10 @@ const userSlice = createSlice({
 });
 ```
 
+## Flow 
+![Screenshot (89)](https://github.com/user-attachments/assets/ca1e7ab3-c41b-45de-985b-7482562f1155)
+![Screenshot (90)](https://github.com/user-attachments/assets/31c04215-32bc-4f91-b5ac-e5007cf061d5)
+
+
 
 
