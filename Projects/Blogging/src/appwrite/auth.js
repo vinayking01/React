@@ -10,12 +10,14 @@ export class Authservice {
     constructor()
     {
         this.client
-        .setEndpoint(conf.VITE_React_APP_APPWRITE_URL) // Your API Endpoint
-        .setProject(conf.VITE_APPWRITE_PROJECT_ID);
+        .setEndpoint(conf.appwriteUrl) // Your API Endpoint
+        .setProject(conf.appwriteProjectId);
         this.account = new Account(this.client);
         
 
     }
+
+    // create user account/ signup
 
     async createAccount({email, password, name}) {
         try {
@@ -34,6 +36,8 @@ export class Authservice {
         }
     }
     
+
+    // login user
     async login({email,password}){
         try {
             const session = await this.account.createEmailPasswordSession(
@@ -62,7 +66,7 @@ export class Authservice {
     async logout()
     {
         try{
-            const result = await this.account.deleteSessions);
+            const result = await this.account.deleteSessions;
             return result;
         }
         catch(err)

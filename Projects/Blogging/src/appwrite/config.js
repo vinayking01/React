@@ -11,8 +11,8 @@ export class Service {
     bucket;
     constructor() {
         this.client
-        .setEndpoint(conf.VITE_React_APP_APPWRITE_URL) // Your API Endpoint
-        .setProject(conf.VITE_APPWRITE_PROJECT_ID);
+        .setEndpoint(conf.appwriteUrl) // Your API Endpoint
+        .setProject(conf.appwriteProjectId);
         
         this.Databases =  new Databases(this.client)
         this.bucket = new Storage(this.client)
@@ -22,7 +22,7 @@ export class Service {
     async createPost({title, slug,content,featuredImage,status,userId}){
         try{
             return await this.Databases.createDocument(
-                conf.VITE_APPWRITE_DATABASE_ID,
+                conf.appwriteeDatabaseUrl,
                 conf.appwriteCollectionId,
                 slug,   // here we considered that slug as unique id
                 {
@@ -44,7 +44,7 @@ export class Service {
     async updatePost(slug,{title,content,featuredImage,status}){
         try{
             return await this.Databases.updateDocument(
-                conf.VITE_APPWRITE_DATABASE_ID,
+                conf.appwriteeDatabaseUrl,
                 conf.appwriteCollectionId,
                 slug,
                 {
@@ -66,7 +66,7 @@ export class Service {
     {
         try{
            await this.Databases.deleteDocument(
-                conf.VITE_APPWRITE_DATABASE_ID,
+                conf.appwriteeDatabaseUrl,
                 conf.appwriteCollectionId,
                 slug,
             )
@@ -83,7 +83,7 @@ export class Service {
     {
         try{
            return await this.Databases.getDocument(
-                conf.VITE_APPWRITE_DATABASE_ID,
+                conf.appwriteeDatabaseUrl,
                 conf.appwriteCollectionId,
                 slug,
             )
@@ -99,7 +99,7 @@ export class Service {
     {
         try{
            return await this.Databases.listDocuments(
-                conf.VITE_APPWRITE_DATABASE_ID,
+                conf.appwriteeDatabaseUrl,
                 conf.appwriteCollectionId,
                 queries    // this is optional to give query  - this is like condition to get the data 
             )
@@ -110,7 +110,8 @@ export class Service {
         }
     }
 
-    // file upload service 
+    // file upload service  -Appwrite Storage allows you to manage files in your project. You can use it to store images, videos, documents, and other files for your projects. It provides APIs to upload, download, delete, and list files, with many added utilities.
+
     async uploadFile(file)
     {
         try{
@@ -141,7 +142,7 @@ export class Service {
     }
 
     // Preview file
-    previewFile(fileID)
+    getFilePreview(fileID)
     {
         try{
             return this.bucket.getFilePreview(
