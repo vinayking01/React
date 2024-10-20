@@ -3,6 +3,7 @@ import {UseState_hook} from './UseState/useState_hook'
 import { UseEffect_hook } from './UseEffect/UseEffect_hook'
 import {UseContext_hook} from './UseContext/UseContext_hook'
 import {UseRef_hook} from './UseRef/UseRef_hook'
+import ForwardRef_Hook from './ForwardRef/ForwardRef'
 import { UseReducer_hook } from './UseReducer/UseReducer_Hook'
 import { UseLayout_hook } from './UseLayout/UseLayout_hook'
 import UseMemo_hook from './UseMemo/UseMemo_hook'
@@ -32,6 +33,9 @@ function App() {
       {/* UseRef Hook */}
       {/* <UseRef_hook /> */}
 
+      {/* ForwardRef Hook */}
+      < ForwardRef_Hook />
+
       {/* UseReducer_Hook  */}
       {/* <UseReducer_hook /> */}
       
@@ -42,7 +46,7 @@ function App() {
       {/* <UseMemo_hook name="Abhi1" totalmarks={490} totalsubject={5}/> */}
 
       {/* UseCallback Hook */}
-      <UseCallBack_Hook />
+      {/* <UseCallBack_Hook /> */}
 
       {/* UseCustom Hook */}
       

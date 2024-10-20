@@ -85,6 +85,40 @@ function App() {
 
 3. The useRef Hook can also be used to keep track of previous state values.
 
+## ForwardRef Hook
+1. Forwardref is a utitlity that allows you to pass refs through components to a DOM element or another component. While useref is used to create a reference , forwardRef is necessary when you want to forward that reference from a parent component to a child component.
+2. 
+
+```
+Parent - 
+  const focusOnInput = () => {
+    if (inputRef.current) {
+      inputRef.current.focus(); // if you don't use forward ref in Child component then it won't work
+    }
+  };
+
+  return (
+    <div>
+      {/* Pass the ref to the CustomInput component */}
+      <CustomInput ref={inputRef} />
+      <button onClick={focusOnInput}>Focus Input</button>
+    </div>
+  );
+}
+
+Child - 
+import React, { forwardRef } from 'react';
+
+// Child component that forwards the ref to the input element
+const CustomInput = forwardRef((props, ref) => {
+  return <input ref={ref} type="text" placeholder="Type here..." />;
+});
+
+export default CustomInput;
+
+```
+
+
 ## UseReducer()  Hook
 1. The useReducer Hook is similar to the useState Hook.It allows for custom state logic.If you find yourself keeping track of multiple pieces of state that rely on complex logic, useReducer may be useful.
 
