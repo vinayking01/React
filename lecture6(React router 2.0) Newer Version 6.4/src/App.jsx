@@ -17,7 +17,7 @@ function App() {
     <div style={{ border: '10px dashed blue', padding: '10px', width: "130px", height: '130px',  margin: 'auto' }}>
      No effect will take place here
     </div>
-    
+   
     </>
   )
 }

@@ -12,7 +12,7 @@ function LogoutBtn() {
         authService.logout().then(() => {
             console.log("Deleted session");
             dispatch(logout());
-            navigate('/login'); // Navigate to home after logging out
+            navigate('/login '); // Navigate to home after logging out
         }).catch(error => {
             console.error("Logout failed:", error);
         });
