@@ -1,8 +1,6 @@
 
-function Logo({width = '100px'}) {
+export function Logo({width = '100px'}) {
   return (
     <div>Logo</div>
   )
 }
-
-export default Logo;

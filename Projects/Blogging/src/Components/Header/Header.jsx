@@ -1,14 +1,14 @@
 import React from 'react'
-import container from '../container/container';
+import Container from '../container/Container';
 import { Link } from 'react-router-dom';
-import Logo, { logo } from '../logo'
-import logoutBtn from './logoutBtn';
-import { useSelector } from 'react-redux';
+import {Logo} from '../logo'
+import LogoutBtn from './logoutBtn';
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const authStatus = useSelector((state)=>{
-    state.auth.status})
+  return state.status})
     const navigate = useNavigate();
 
     // creating navigation 
@@ -42,7 +42,7 @@ function Header() {
 
   return (
     <header className='py-3  shadow bg-gray-500'>
-      <container>
+      <Container>
         <nav className='flex'>
           {/* logo */}
           <div className='mr-4'>
@@ -57,23 +57,26 @@ function Header() {
                 navItems.map((item)=>{
                   if(item.active)
                     {
+                      return(
                       <li key={item.name}><button type="button" onClick={()=>{
                         navigate(item.slug)  // navigation will do the redirection and we have already passed the link in the name slug
                       }} className='inline-block px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'>
                         {item.name}
                         </button></li>
+                      )
                     }
+                    return null;
                 })
               }
                  {/* one thing is remaining is if user is already login then show him the logout button . */}
               {authStatus && (
-                  <li> <logoutBtn/> </li>
+                  <li> <LogoutBtn/> </li>
                 )}
             </ul>
           </div>
 
         </nav>
-      </container>
+      </Container>
 
     </header>
   )

@@ -21,6 +21,10 @@ export class Service {
     // Creating post 
     async createPost({title, slug,content,featuredImage,status,userId}){
         try{
+            console.log("title" , title)
+            console.log("Content" , content)
+            console.log("fratured image", featuredImage)
+            console.log("status" , status, userId)
             return await this.Databases.createDocument(
                 conf.appwriteeDatabaseUrl,
                 conf.appwriteCollectionId,
@@ -156,8 +160,6 @@ export class Service {
          }
     }
   
-
-
 }
 
 

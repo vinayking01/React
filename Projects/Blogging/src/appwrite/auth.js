@@ -33,6 +33,7 @@ export class Authservice {
         } catch (err) {
             console.error('Error creating account:', err.message); // Log the error details
             // Handle the error accordingly, like displaying a message to the user
+            throw err;
         }
     }
     
@@ -47,6 +48,7 @@ export class Authservice {
             return session;
         } catch (err) {
             console.error('Error creating account:', err.message); // error during logging
+            throw err;
         }
     }
 
@@ -57,21 +59,21 @@ export class Authservice {
             return user;
         } catch (err) {
             console.log(err)
+            throw err;
         }
-
-        return null; // if user account not found
     }
 
     // logout 
     async logout()
     {
         try{
-            const result = await this.account.deleteSessions;
-            return result;
+            await this.account.deleteSessions();
+            
         }
         catch(err)
         {
             console.log(err)
+            throw err;
         }
     }
 }
