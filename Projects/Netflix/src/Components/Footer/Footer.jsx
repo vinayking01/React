@@ -10,8 +10,8 @@ function Footer() {
   return (
     <>
 
-    <div className='footer absolute -bottom-20 w-full   m-auto flex flex-col gap-12'>
-      <div className='mx-52 '>
+    <div className='footer absolute -bottom-20 w-full m-auto flex flex-col gap-12'>
+      <div className='sm:mx-52 '>
       <div className="footer-icons flex flex-row w-10 h-10 gap-6 ">
         <img src={youtube_ico} alt="" />
         <img src={facebook_ico} alt="" />
@@ -20,7 +20,7 @@ function Footer() {
       </div>
       </div>
       <div>
-      <ul className='grid grid-cols-3 gap-4 mx-52'>
+      <ul className='footer-links grid grid-cols-3 gap-4 sm:mx-52'>
         <li>
           Audio Description
         </li>

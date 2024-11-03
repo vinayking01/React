@@ -13,6 +13,7 @@ import cross_Cut from '../../assets/cross_cut.svg'
 function Navbar_Mobile() {
     const [ishover, SetIsHovered] = useState(false);
     const navRef = useRef()
+    const [side_hamburger ,SetHamburger] = useState(true);
 
     useEffect(() => {
         if (navRef.current) {
@@ -40,11 +41,14 @@ function Navbar_Mobile() {
                         <img src={logo} alt="Netflix" className='center w-32 h-8' />
                     </div>
                 </div>
-
-                <div className='navbar-right flex flex-col bg-black absolute right-0 -top-2 h-[100vh] gap-5 '>
-                    <div>
-                        <img
-                    </div>
+                {(side_hamburger) ?<div className='text-right'>
+                    <img src={hamburger} alt="hamburger" className='cursor-pointer w-12 h-5' onClick={()=>{
+                        SetHamburger(false)
+                    }} />
+                </div> : <div className='navbar-right flex flex-col bg-black absolute right-0 -top-2 h-[100vh] gap-5 '>
+                <img src={cross_Cut} alt="cross-cut" className='cursor-pointer w-10 h-5 m-2' onClick={()=>{
+                        SetHamburger(true)
+                    }} />
                     <div className='ml-1 flex '>
                         <div className='nav-bar-middle '>
                             <ul className='flex flex-col items-center gap-4 py-3'>
@@ -71,7 +75,8 @@ function Navbar_Mobile() {
                         </div>
                     </div>
 
-                </div>
+                </div> }  
+
             </div>
         </>
     )

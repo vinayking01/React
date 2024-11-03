@@ -7,20 +7,32 @@ import play_ico from '../../assets/play_icon.png'
 import info_ico from '../../assets/info_icon.png'
 import Titlecards from '../../Components/Titlecards/Titlecards'
 import Footer from '../../Components/Footer/Footer'
-// import Navbar_Mobile from '../../Components/Navbar/Navbar-mobile'
+import Navbar_Mobile from '../../Components/Navbar/Navbar-mobile'
 
 import '../../App.css'
+import { useState,useEffect } from 'react'
 
 
 function Home() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth > 600);
 
+  const handleResize = () => {
+    setIsMobile(window.innerWidth > 600);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <>
       <div className='relative'>
         <div className={`sticky -top-1  z-10`} >
-        <Navbar />
-        {/* <Navbar_Mobile/> */}
+          {isMobile? <Navbar />:<Navbar_Mobile/>}        
         </div>
        {/* background image */}
         <div className='hero  relative -top-24 w-[100%]'>
@@ -37,17 +49,17 @@ function Home() {
             <button type="button" className='bg-slate-800 py-1 px-2  flex items-center'><img src={info_ico} width={20} height={24} alt="" /> More Info</button>
           </div>
         </div>
-        {/* <div className=' w-[93.5%] relative bottom-96 left-24 '>
+        <div className='title-card w-[93.5%] relative bottom-96 left-24 '>
           <Titlecards />
-        </div> */}
-        {/* <div className='more-cards w-[93.5%] relative flex flex-col -top-52 left-24 gap-y-12'>
+        </div>
+        <div className='title-card w-[93.5%] relative flex flex-col -top-52 left-24 gap-y-12'>
           <Titlecards title={"Popular BlockBuster Movies"} category={"popular"}/>
           <Titlecards title={"Only on Netflix Top Rated"} category={"top_rated"}/>
           <Titlecards title={"Upcoming"} category={"upcoming"}/>
-        </div> */}
+        </div>
       </div>
       <div className='relative'>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </>
 

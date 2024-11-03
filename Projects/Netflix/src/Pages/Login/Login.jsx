@@ -44,14 +44,14 @@ function Login() {
 
   return (
 
-    // (loader)? <div> <img src={netflix_spinner} alt="" className='w-32 h-32 m-auto' /></div> : 
+    (loader)? <div> <img src={netflix_spinner} alt="" className='w-32 h-32 m-auto' /></div> : 
     <div>
       {/* Logo  */}
-      <div className='pl-36 pt-16'>
-        <img src={logo} alt="Netflix" className='center w-36 h-10' />
+      <div className='sm:pl-36 sm:pt-16 p-9 z-20'>
+        <img src={logo} alt="Netflix" className='z-20 center w-36 h-10' />
       </div>
 
-      <div className='relative -top-28 '>
+      <div className='relative -top-36 z-30 z text-center'>
         <img
           src={hero_banner}
           alt="hero banner"
@@ -59,11 +59,11 @@ function Login() {
         />
         {/* form section  */}
 
-        <div className='absolute top-[20%] left-[50%] transform -translate-x-[50%] z-9'>
-          <div className='border-4 border-white p-9 m-auto text-center bg-black opacity-65'>
-            <form onSubmit={handleSubmit(onSubmit)} className="login-form flex flex-col items-start">
+        <div className='sm:absolute sm:top-[20%] left-[50%] transform sm:-translate-x-[50%] w-60 h-12 sm:w-auto  sm:h-auto  bottom-[-3%] m-auto z-9'>
+          <div className='border-4 relative top-[-200px] sm:top-0 border-white p-9 m-auto text-center  bg-black opacity-80 z-10'>
+            <form onSubmit={handleSubmit(onSubmit)} className="login-form flex flex-col items-start z-50">
               <h1 className='text-3xl font-bold mb-6'>{Sign_in}</h1>
-              {(Sign_in =="Sign Up") && <div className='w-96 h-12 mb-6'>
+              {(Sign_in =="Sign Up") && <div className='sm:w-96 sm:h-12 mb-6'>
               <input
                   id="name"
                   type="text"
@@ -78,7 +78,7 @@ function Login() {
                   }}
                 />
                 </div>}
-              <div className='w-96 h-12 mb-6'>
+              <div className='sm:w-96 sm:h-12 mb-6'>
                 <input
                   id="email"
                   type="email"
@@ -97,7 +97,7 @@ function Login() {
                   }}
                 />
               </div>
-              <div className='w-96 h-12 mb-6'>
+              <div className='sm:w-96 sm:h-12  mb-6'>
                 <input
                   id="password"
                   type="password"

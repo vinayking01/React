@@ -23,7 +23,7 @@ const firebaseConfig = {
   measurementId: String(import.meta.env.VITE_measurementId)
 };
 
-console.log(firebaseConfig)
+// console.log(firebaseConfig)
 
 // Initialize and export Firebase Authentication
 export const app = initializeApp(firebaseConfig);

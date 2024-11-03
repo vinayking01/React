@@ -9,19 +9,52 @@
 
 @media only screen and (max-width: 600px) 
 {
-    /* .nav-bar{
-        padding-left: 2px;
+    .hero-caption{
+        top:-220px;
+        left:20px;
+        right:50px;
+        width: 92vw;
+        position: relative;
+         p{
+            margin-top: 25px;
+        }
+    }
 
-        .nav-bar-left{
-            margin-left: 0px;
+    .title-card{
+        position: relative;
+        top: -130px;
+        left: 2px;
+        bottom: 0px;
+
+        .movie-inner-container {
+         gap: 1px;
+        }
+        .movie-image{
+            width: 154px;
+            height: 202px;
+                
+        }
+    }
+
+    .footer{
+        position: relative;
+        .footer-icons{
+            justify-content: center;
+            width: auto;
         }
 
-        .nav-bar-middle ul {
-            display: flex;
-            flex-direction: column;
-            gap: 0px;
+        .footer-links{
+            align-items: center;
+            justify-items: center;
+            margin: 10px;
         }
-    } */
+    }
 
+    .Back-arrow{
+        img{
+            width: 30px;
+            height: 30px;
+        }
+    }
 }
 

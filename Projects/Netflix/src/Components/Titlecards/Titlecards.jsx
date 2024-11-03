@@ -43,12 +43,12 @@ function Titlecards({title,category=null}) {
           <h2 className='text-2xl'>{(!title)?"Popular On Netflix":title}</h2>
         </div>
         {/* Add padding to the scroll area to better visualize the scrollbar */}
-        <div className='flex gap-3 overflow-hidden ' ref={cardRef}>
+        <div className=' movie-inner-container flex gap-8 mx-w-[600px] overflow-hidden ' ref={cardRef}>
           {
            (movie_data) && movie_data.map((card, index) => {
               return (
-                <Link to={`/player/${card.id}`} key={index} className='w-64 h-auto flex-shrink-0'>
-                  <img src={`https://image.tmdb.org/t/p/w500/`+card.poster_path} alt="" className='w-full h-full ' />
+                <Link to={`/player/${card.id}`} key={index} className='movie-image w-64 h-72 w-max-84 p-6 rounded-lg flex-shrink-0'>
+                  <img src={`https://image.tmdb.org/t/p/w500/`+card.poster_path} alt="" className='w-full h-full bg-cyan-500 shadow-lg shadow-cyan-500/50 ' />
                   <p className='text-white relative bottom-7 pl-3'>{card.original_title}</p>
                 </Link>
               )

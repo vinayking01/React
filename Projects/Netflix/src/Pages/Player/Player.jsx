@@ -46,7 +46,7 @@ function Player() {
       <div className='flex flex-row justify-between mx-9'>
         <p>
           {
-            Date(video.published_at)
+            Date(video.published_at).split("GMT")[0]
           }
         </p>
         <p>
