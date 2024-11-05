@@ -1,0 +1,20 @@
+.side-video-list {
+    img{
+        flex-basis: 49%;
+        width: 50%;
+
+    }
+}
+
+.vid-info{
+    flex-basis: 49%;
+
+    p{
+        font-size: medium;
+    }
+
+    h4{
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+}

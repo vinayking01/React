@@ -1,0 +1,22 @@
+
+.nav-bar{
+    .menu-icon{
+      width: 30px;
+      height: 20px;
+    }
+    
+    .logo{
+      width: 60%;
+      height: 40%; 
+    }
+  
+    img{
+      cursor: pointer;
+    }
+  
+    .nav-right > img{
+      width: 80%;
+      height: 60%; 
+    }
+  }
+  
