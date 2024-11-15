@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import'./Sidebar.css'
 import home from '../../assets/home.png'
 import game_icon from '../../assets/game_icon.png'
@@ -16,52 +16,55 @@ import megan from '../../assets/megan.png'
 import cameron from '../../assets/cameron.png'
 
 
-function Sidebar({small_sidebar,category,setCategory}) {
+function Sidebar({small_sidebar,category,setCategory,setQuery}) {
+
+    // useEffect(,[category])
+
   return (
     <div className={`sidebar w-[15%] ml-1 h-[100vh] fixed top-16 pl-4 pt-1 mt-4 bg-white ${small_sidebar? "small-sidebar":""}`}>
         <div className="shortcut-links">
             <div className={`sidelinks ${category ===0 ? 'active':""}`} onClick={()=>{
-                setCategory(0)
+                setCategory(0); setQuery(null); // this is done only for removing the query from the link 
             }}>
                 <img src={home} alt="" /> <p>Home</p>
             </div>
             <div className={`sidelinks ${category ===20 ? 'active':""}`} onClick={()=>{
-                setCategory(20)
+                setCategory(20) ;setQuery("")
             }}>
                 <img src={game_icon} alt="" /> <p>Gaming</p>
             </div>
             <div className={`sidelinks ${category ===2 ? 'active':""}`} onClick={()=>{
-                setCategory(2)
+                setCategory(2) ;setQuery("")
             }}>
                 <img src={automobiles} alt="" /> <p>Automobiles</p>
             </div>
             <div className={`sidelinks ${category ===17 ? 'active':""}`} onClick={()=>{
-                setCategory(17)
+                setCategory(17) ;setQuery("")
             }}>
                 <img src={sports} alt="" /> <p>Sports</p>
             </div>
             <div className={`sidelinks ${category ===24 ? 'active':""}`} onClick={()=>{
-                setCategory(24)
+                setCategory(24);setQuery("")
             }}>
                 <img src={entertainment} alt="" /> <p>Entertainment</p>
             </div>
             <div className={`sidelinks ${category ===28 ? 'active':""}`} onClick={()=>{
-                setCategory(28)
+                setCategory(28);setQuery("")
             }}>
                 <img src={tech} alt="" /> <p>Technology</p>
             </div>
             <div className={`sidelinks ${category ===10 ? 'active':""}`} onClick={()=>{
-                setCategory(10)
+                setCategory(10);setQuery("")
             }}>
                 <img src={music} alt="" /> <p>Music</p>
             </div>
             <div className={`sidelinks ${category ===22 ? 'active':""}`} onClick={()=>{
-                setCategory(22)
+                setCategory(22);setQuery("")
             }}>
                 <img src={blogs} alt="" /> <p>Blogs</p>
             </div>
             <div className={`sidelinks ${category ===25 ? 'active':""}`} onClick={()=>{
-                setCategory(25)
+                setCategory(25);setQuery("")
             }}>
                 <img src={news} alt="" /> <p>News</p>
             </div>

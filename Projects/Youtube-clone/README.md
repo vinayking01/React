@@ -1,8 +1,7 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Utility used
 
-Currently, two official plugins are available:
+1. Youtube API - https://developers.google.com/youtube/v3/getting-started
+2. moment package  - for counting the time like 1 week old , 7 days old, 1 month old from current time.
+3. React Router dom
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
