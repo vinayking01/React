@@ -48,7 +48,8 @@ export  const Feeds =({category=0, search})=> {
         { video_feed_data && video_feed_data.map((data,index)=>{
             return (
                 <div onClick={() => {
-                    navigate(`/video/${category}/${data.id.videoId}/${data.snippet.channelId}`, { replace: true }); 
+                    console.log(data)
+                    navigate(`/video/${category}/${search != null? data.id.videoId : data.id}/${data.snippet.channelId}`, { replace: true }); 
                  }} key={index} className='card'>
              <img src={data.snippet.thumbnails.medium.url} width={"100%"} height={'100%'} alt="" />
              <h2>{data.snippet.title}</h2>

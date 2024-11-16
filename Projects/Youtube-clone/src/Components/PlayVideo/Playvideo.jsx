@@ -51,7 +51,7 @@ function Playvideo({ videoId, channelId }) {
 
     return (
         <div className="Playvideo basis-[70%] mx-2">
-            <div className='h-[500px]'>
+            <div className='h-[500px] video'>
                 <iframe
                     width="100%"
                     height="100%"
@@ -63,10 +63,10 @@ function Playvideo({ videoId, channelId }) {
 
             {videoData && (
                 <div>
-                    <h3 className='font-bold mt-2 text-xl'>{videoData.snippet.title}</h3>
+                    <h3 className='font-bold mt-2 text-[15px] sm:text-xl'>{videoData.snippet.title}</h3>
                     <div className="play-video-info flex align-items-center justify-between flex-wrap mt-2 text-[14px] text-gray-700">
                         <p>{formattedViews} &bull; {moment(videoData.snippet.publishedAt).fromNow()}</p>
-                        <div className='flex flex-row'>
+                        <div className='flex flex-row gap-[1px] justify-center place-content-center'>
                             <span><img src={like} alt="" />{videoData.statistics.likeCount}</span>
                             <span><img src={dislike} alt="" /></span>
                             <span><img src={share} alt="" />Share</span>
@@ -86,7 +86,7 @@ function Playvideo({ videoId, channelId }) {
                         <button>Subscribe</button>
                     </div>
                     <div className="video-description">
-                        <p>{videoData.snippet.description}</p>
+                        <p className='description '>{videoData.snippet.description}</p>
                         <hr />
                         <h4>Top 20 Comments</h4>
                         <div>

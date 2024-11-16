@@ -101,3 +101,56 @@
         color: #5a5a5a;
     }
 }
+
+@media screen and (max-width: 640px) {
+    .Playvideo { 
+    flex-basis: 100%;
+     width: 100%;
+     height: 100%;
+ 
+    }
+    
+    .video{
+        height: 100%;
+    }
+    
+
+    .play-video-info {
+        justify-content: space-between;
+        padding:2px ;
+        flex-direction: row;
+        gap: 5px;
+        span {
+            display: inline-flex;
+            align-items:flex-end;
+            margin-left: 15px;
+        }
+        
+        div > span {
+            margin-left: 0px;
+        }
+    
+    }
+
+    .video-description {
+
+        padding: 10px;
+        .description {    
+        text-align: center;
+
+    }
+    
+    }
+
+    .publisher{
+        font-size: medium;
+
+            div .channel-name {
+                font-size: medium;
+            }
+
+            button{
+                padding: 8px 15px;
+            }
+    }
+ }

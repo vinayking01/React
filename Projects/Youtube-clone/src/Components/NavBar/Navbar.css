@@ -19,4 +19,29 @@
       height: 60%; 
     }
   }
-  
+
+
+  @media screen and (max-width: 640px) {
+    .nav-bar{
+     gap: 5px;
+      .logo{
+        width: 100%;
+      }
+    }
+    .nav-left{
+      gap: 4px;
+      width: 20%;
+    }
+    .nav-middle{
+      width: 40%;
+      input{
+        width: 100px;
+      }
+    }
+    .nav-right{
+     justify-content: flex-start;
+     gap: 5px;
+     }
+
+
+}

@@ -53,3 +53,22 @@ width: 5%;
 padding-bottom: 3px;
 border-bottom: 2px solid red;
 }
+
+@media screen and (max-width: 640px) {
+    .sidebar{
+        display: none;
+  }
+
+  .small-sidebar{
+        width: 13%;
+        display: inline-block;
+     p{
+        display: none;
+     }
+
+     h3{
+        display: none;
+     }
+  }
+
+}

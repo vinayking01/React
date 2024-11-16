@@ -36,7 +36,7 @@ function Navbar({ Setsidebar }) {
           <img src={menu_icon} alt="" className="menu-icon" onClick={() => {
             Setsidebar(Prev => !Prev);
           }} />
-          <Link to='/'><img src={Youtube_logo} alt="" className="logo" /> </Link>
+          <Link to='/' className='w-[auto]'><img src={Youtube_logo} alt="" className='logo w-[50%]'/> </Link>
         </div>
 
         <div className="flex nav-middle gap-4 h-auto border-2 border-black rounded-full px-4 items-center">

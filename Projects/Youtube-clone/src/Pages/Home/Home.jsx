@@ -17,15 +17,17 @@ function Home({sidebar}) {
     },[Params.query])
 
     return (
-        <>
+        // categories side bar
+        <div >
         <Sidebar small_sidebar={sidebar} category={category}  setCategory={setCategory} setQuery={setQuery}/> 
         
+        {/*  feed section  */}
         <div className={`container  w-[85%] ${sidebar ? "large-container" : ""}`}>
         {/* <h2>My query {query}</h2> */}
             <Feeds category={category} search={query} />
         </div>
 
-        </>
+        </div>
 
 
     )
