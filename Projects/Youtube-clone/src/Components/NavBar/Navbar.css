@@ -34,8 +34,9 @@
     }
     .nav-middle{
       width: 40%;
+      
       input{
-        width: 100px;
+        width: 100%;
       }
     }
     .nav-right{
