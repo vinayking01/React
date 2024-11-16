@@ -118,7 +118,7 @@ function Playvideo({ videoId, channelId }) {
                         <button>Subscribe</button>
                     </div>
                     <div className="video-description">
-                        <p className='description'>{videoData.snippet.description}</p>
+                        <p className='description'>{(videoData.snippet.description).length <230 ?(videoData.snippet.description): (videoData.snippet.description).slice(0,230) } ... </p>
                         <hr />
                         <h4>Top {videoComments.length} Comments</h4>
                         <div>
