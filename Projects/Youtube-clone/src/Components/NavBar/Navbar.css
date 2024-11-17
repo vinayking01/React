@@ -24,19 +24,28 @@
   @media screen and (max-width: 640px) {
     .nav-bar{
      gap: 5px;
-      .logo{
+      
+     .menu-icon{
+      width: 16px;
+      height: 12px;
+     }
+     
+     .logo{
         width: 100%;
       }
+
     }
     .nav-left{
-      gap: 4px;
-      width: 20%;
+      gap: 3px;
+      width: 25%;
     }
     .nav-middle{
+      flex-direction: row;
       width: 40%;
       
       input{
         width: 100%;
+        padding: 1px 1px;
       }
     }
     .nav-right{

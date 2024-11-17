@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import './Feeds.css';
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment';
@@ -72,7 +72,10 @@ export const Feeds = ({ category = 0, search }) => {
   //   // };
   // }, [nextFeedToken]);
 
-
+  const formattedViews = (viewCount) => {
+    return  viewCount >= 1_000_000 ? Math.floor(viewCount / 1_000_000) + 'M' : 
+    viewCount >= 1_000 ? Math.floor(viewCount / 1_000) + 'k': viewCount;
+  }
 
   return (
     <>
@@ -81,7 +84,7 @@ export const Feeds = ({ category = 0, search }) => {
           {videoFeedData.map((data, index) => (
             <div
               key={data.id?.videoId || data.id || index} // Ensure unique keys
-              className="card"
+              className="card p-2 shadow-xl rounded"
               onClick={() =>
                 navigate(`/video/${category}/${search ? data.id.videoId : data.id}/${data.snippet.channelId}`, {
                   replace: true,
@@ -90,15 +93,19 @@ export const Feeds = ({ category = 0, search }) => {
             >
               <p>{ }</p>
               <img src={data.snippet.thumbnails.medium.url} alt={data.snippet.title} className="thumbnail" />
-              <h2>{data.snippet.title}</h2>
-              <h3>{data.snippet.channelTitle}</h3>
+              <h2 className='font-sans'>{(data.snippet.title).length <35 ?(data.snippet.title): (data.snippet.title).slice(0,35)+'...'}</h2>
+              <div className='flex flex-row content-center align-center justify-between'>
+              <h4 className='font-serif text-sm'>{data.snippet.channelTitle}</h4>
+              <p>{formattedViews(data.statistics.viewCount)} &bull; {moment(data.snippet.publishedAt).fromNow()}</p>
+              </div>
+              
             </div>
           ))}
         </div>
       )}
 
       {nextFeedToken && (
-        <div className='text-right font-semibold'>
+        <div className='text-center mt-[20px] font-semibold'>
           <button onClick={fetchMoreFeed} className="load-more-btn">
             Click Here to Load More Feed
           </button>

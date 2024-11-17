@@ -33,3 +33,11 @@
 .card p{
     font-size:14px;
 }
+
+@media screen and (max-width: 640px) {
+
+    .feed{
+        grid-row-gap: 13px;
+    }
+   
+}

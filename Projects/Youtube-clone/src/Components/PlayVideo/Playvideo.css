@@ -146,13 +146,18 @@
 
     .publisher{
         font-size: medium;
-
+        padding: 1px 4px;
             div .channel-name {
                 font-size: medium;
             }
 
             button{
                 padding: 8px 15px;
+            }
+
+            img{
+                margin-left: 0px;
+                margin-right: 5px;
             }
     }
 
