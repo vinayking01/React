@@ -9,6 +9,7 @@ import search_icon from '../../assets/search.png';
 import './Navbar.css';
 import { Link, useNavigate } from 'react-router-dom';
 
+
 function Navbar({ setSidebar }) {
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
@@ -26,9 +27,12 @@ function Navbar({ setSidebar }) {
     }
   };
 
+
+ 
+
   return (
     <div>
-      <nav className="nav-bar flex flex-row justify-between gap-2 h-[72px] p-4 border-2 border-gray-500 fixed bg-white w-[100%]">
+      <nav className="nav-bar flex flex-row justify-between gap-2 h-[72px] p-4 border-2 border-gray-500 fixed bg-white w-[100%] z-[100]">
         <div className="nav-left flex items-center gap-4">
           <img
             src={menu_icon}
@@ -36,7 +40,7 @@ function Navbar({ setSidebar }) {
             className="menu-icon"
             onClick={() => setSidebar((prev) => !prev)}
           />
-          <Link to="/" className="w-[auto]">
+          <Link to="/" className="w-[auto]" onClick={()=>{setQuery(" ")}}>
             <img src={Youtube_logo} alt="YouTube Logo" className="logo w-[50%]" />
           </Link>
         </div>

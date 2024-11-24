@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './Recommended.css';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 function Recommended_video({ categoryId = 0 }) {
-    const [video_feed_data, SetFeed] = useState(null);
+    const [video_feed_data, SetFeed] = useState([]);
     const [currentCategoryId, setCurrentCategoryId] = useState(categoryId);
     const [nextVideoToken , setNextVideoToken] = useState(false)  // Track the nextPageToken
     const [isLoadingVideos , setIsLoadingVideos] = useState(false)  // Track loading state for Videos
@@ -41,7 +42,7 @@ function Recommended_video({ categoryId = 0 }) {
             const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&part=statistics&chart=mostPopular&maxResults=25&videoCategoryId=${currentCategoryId}&pageToken=${nextVideoToken}&key=${import.meta.env.VITE_YOUTUBE_APIKEY}`);
             const data = await res.json();
             // console.log(data.nextPageToken)
-            SetFeed((prev_video) => [...prev_video, ...data.items]);
+            SetFeed((prev_video) => [...prev_video, ...data.items || [] ]);
             setNextVideoToken(data.nextPageToken)
         }
         catch(err){
@@ -61,7 +62,15 @@ function Recommended_video({ categoryId = 0 }) {
 
     return (
         <div className='recommended basis-[28%] flex flex-col gap-2'>
-            {video_feed_data && video_feed_data.map((data, index) => {
+            {video_feed_data &&
+            <InfiniteScroll
+            dataLength={video_feed_data.length}
+            next={fetch_more_videos}
+            hasMore={!!nextVideoToken}
+            loader={<h4>Loading...</h4>}
+            >
+            <div>
+            {video_feed_data.map((data, index) => {
                 return (
                     <div className="side-video-list" key={index}>
                         <div onClick={() => {
@@ -82,13 +91,10 @@ function Recommended_video({ categoryId = 0 }) {
                     </div>
                 );
             })}
-        {/* loading more videos */}
-         {nextVideoToken && !isLoadingVideos && ( 
-            <button onClick={fetch_more_videos} className="load-more-btn">Click More Videos</button>)
-        }
+            </div>
+            </InfiniteScroll>
+            }
         </div>
-
-         
     );
 }
 

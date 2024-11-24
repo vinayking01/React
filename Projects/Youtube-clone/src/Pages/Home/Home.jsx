@@ -1,26 +1,33 @@
 import React, { useState } from 'react';
 import './Home.css';
-import Sidebar from '../../Components/SideBar/Sidebar';
+import Sidebar_box from '../../Components/SideBar/Sidebar';
 import { Feeds } from '../../Components/Feeds/Feeds';
 import { useParams } from 'react-router-dom';
+import CategoryBar from '../../Components/CategoryBar/CategoryBar';
 
-function Home({ sidebar }) {
+function Home({ sidebar ,setSidebar}) {
   const [category, setCategory] = useState(0);
   const { query } = useParams(); // Destructure query directly
+  console.log("query", query)
 
   return (
-    <div>
+    <div className=''>
       {/* categories Sidebar Section */}
-      <Sidebar
+      <Sidebar_box
         small_sidebar={sidebar}
         category={category}
         setCategory={setCategory}
-        setQuery={() => {}} // Removed unused setQuery dependency
+        setQuery={() => { }} // Removed unused setQuery dependency
+        setSidebar= {setSidebar}
       />
 
+      <div className={`Top-category-Bar flex flex-row w-[100%] top-[70px] z-[1] ${sidebar ? `sm:ml-[79px]`:`sm:ml-[200px]`}  bg-white fixed gap-3 `}>
+        <CategoryBar />
+      </div>
+
       {/* Feed Section */}
-      <div className={`container w-[85%] ${sidebar ? 'large-container' : ''}`}>
-        <Feeds category={category} search={query} />
+      <div className={`container w-[100%] ${sidebar ? 'large-container' : ''}`}>
+        <Feeds category={category} search={query ? query : null} small_sidebar={sidebar} />
       </div>
     </div>
   );
@@ -29,6 +36,7 @@ function Home({ sidebar }) {
 export default Home;
 
 
-// Optimizations 
+// Optimizations
 // 1. Destructure Params directly to get query: Avoid redundant calls to Params.query.
 // 2. Params.query logic directly into setQuery: Skip the need for a separate state (query) by passing Params.query directly to Feeds.
+

@@ -1,0 +1,28 @@
+/* Base styling for all elements with rounded borders */
+.custom-element {
+    /* border: 2px solid #ccc; */
+    border-radius: 10px; /* Rounded corners */
+    padding: 2px 2px;
+    /* background-color: white; */
+    color: black;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for hover/click effects */
+    flex-shrink: 0;
+  }
+  
+  /* Hover effect - Change background color */
+  .custom-element:hover {
+    background-color: #f0f0f0; /* Light grey */
+    border-color: #888; /* Darker border color */
+  }
+  
+  /* Active (click) effect - Change background and border color */
+  .custom-element:active {
+    background-color: #4CAF50; /* Green */
+    border-color: #2E7D32; /* Dark green */
+    color: white; /* Text color changes on click */
+  }
+
+.cat-container{
+
+}
