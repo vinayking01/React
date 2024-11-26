@@ -24,7 +24,7 @@
         }
     }
 
-    button {
+    button{
         background-color: red;
         color: #fff;
         padding: 8px 30px;
@@ -37,9 +37,15 @@
         -ms-border-radius: 4px;
         -o-border-radius: 4px;
     }
-
+    
+    .Subscribed {
+        
+        background-color: rgb(149, 134, 134);
+        color: black;
+    }
 
 }
+
 
 .video-description {
     padding-left: 55px;

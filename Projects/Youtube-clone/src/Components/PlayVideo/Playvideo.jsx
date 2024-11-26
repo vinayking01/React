@@ -7,6 +7,12 @@ import save from '../../assets/save.png';
 import jack from '../../assets/jack.png'; // Placeholder image for channel
 import user_profile from '../../assets/user_profile.jpg'; // Placeholder profile for comments
 import moment from 'moment';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import axios from "axios";
+import { Subscription_Request, Subscription_success } from "../../Store/SubscriptionSlice";
+import { GoogleAuthProvider } from 'firebase/auth';
+import { useSelector } from 'react-redux';
 
 function Playvideo({ videoId, channelId }) {
     const [videoData, setVideoData] = useState(null);
@@ -16,6 +22,11 @@ function Playvideo({ videoId, channelId }) {
     const [nextPageToken, setNextPageToken] = useState(null);  // Track the nextPageToken for pagination
     const [isLoadingComments, setIsLoadingComments] = useState(false);  // Track loading state for comments
     const [channelImageUrl, setChannelImgUrl] = useState(null);
+    const Dispatch = useDispatch();
+    const [user_session, setSession] = useState(sessionStorage.getItem('user_session'));
+    const provider = new GoogleAuthProvider();
+    // const [subscriptions, setSubscriptions] = useState([]);
+    const [isSubscribed , subscribeChannel] = useState(false);
 
     // Fetch video data, comments, and channel information
     const fetchVideoData = async () => {
@@ -51,8 +62,50 @@ function Playvideo({ videoId, channelId }) {
         }
     };
 
+    const checkSubscription = async (channel) => {
+        // console.log(user_session)
+          if (!user_session) {
+            console.error("No token available. Please log in first.");
+            return;
+          }
+          Dispatch(Subscription_Request())
+          try {
+            
+            const response = await fetch(
+              `https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet&part=contentDetails&forChannelId=${channel}&mine=true&key=${import.meta.env.VITE_API_KEY}`,
+              {
+                method: "GET",
+                headers: {
+                  Authorization: `Bearer ${user_session}`,
+                  Accept: "application/json",
+                },
+              }
+            );
+      
+            const data = await response.json();
+          
+            if (response.ok) {
+                if(data.items.length > 0)
+                {   
+                    console.log(data.items)
+                    subscribeChannel(true);
+                }
+
+              console.log("Subscriptions:", data.items);
+             
+              Dispatch(Subscription_success(data.items))
+            } else {
+              console.error("Error fetching subscriptions:", data.error.message);
+            }
+          } catch (error) {
+            console.error("Error fetching subscriptions:", error.message);
+          } 
+
+    }
+
     useEffect(() => {
         fetchVideoData();
+        checkSubscription(channelId);
     }, [videoId, channelId]);
 
     // Format subscriber count for display
@@ -87,20 +140,22 @@ function Playvideo({ videoId, channelId }) {
         }
     };
 
+
     // Loading state
     if (loading) {
         return <div className="loader">Loading...</div>;
     }
 
     return (
-        <div className="Playvideo basis-[70%] mx-2">
+
+        <div className="Playvideo sm:flex-[70%] flex-[100%] mx-2">
             <div className="h-[500px] video">
                 <iframe
                     width="100%"
                     height="100%"
                     src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    sandbox="allow-scripts allow-same-origin"
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
                 ></iframe>
             </div>
 
@@ -123,21 +178,45 @@ function Playvideo({ videoId, channelId }) {
                             <img src={channelImageUrl || jack} alt="Channel" className="w-10 rounded-[50%] mx-[15px]" />
                             <div className="flex flex-col gap-1 leading-4">
                                 <p className="channel-name">{videoData.snippet.channelTitle}</p>
-                                <p className="subscriber-count">{channel} Subscribers</p>
+                                <div to='' className="subscriber-count">{channel} Subscribers</div>
                             </div>
                         </div>
-                        <button>Subscribe</button>
+                        <button className={`${isSubscribed ? "Subscribed":""}`} onClick={()=>{}}>{!isSubscribed ? "Subscribe":"Unsubscribe"}</button>
                     </div>
 
                     <div className="video-description">
                         <p className="description">
-                            {(videoData.snippet.description).length < 230 ? 
-                                (videoData.snippet.description) : 
-                                (videoData.snippet.description).slice(0, 230)} ... 
+                            {(videoData.snippet.description).length < 230 ?
+                                (videoData.snippet.description) :
+                                (videoData.snippet.description).slice(0, 230)} ...
                         </p>
                         <hr />
                         <h4>Top {videoComments.length} Comments</h4>
                         <div>
+                            <div className="comment w-[90%] overflow-hidden break-words" >
+                                <img src={user_profile} alt="" />
+                                <div className="w-[100%]">
+                                    {/* <h3>{comment.snippet.topLevelComment.snippet.authorDisplayName}
+                                        <span> {moment(comment.snippet.topLevelComment.snippet.publishedAt).fromNow()}</span>
+                                    </h3> */}
+                                    <div className="flex items-center gap-2">
+                                        <input
+                                            type="text"
+                                            className="your-comment w-full p-2 border-b focus:outline-none border-b-gray-300 rounded-md border-"
+                                            placeholder="Add a comment..."
+                                        />
+                                        <button
+                                            type="submit"
+                                            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                                            onClick={()=>{
+
+                                            }}
+                                        >
+                                            Comment
+                                        </button>
+                                        </div>
+                                </div>
+                            </div>
                             {videoComments && videoComments.length > 0 ? (
                                 videoComments.map((comment, index) => (
                                     <div className="comment w-[90%] overflow-hidden break-words" key={index}>

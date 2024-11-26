@@ -178,20 +178,27 @@ const Login = () => {
 
   // Initialize Cloud Firestore and get a reference to the service
   const db = getFirestore(app);
-  const provider = new GoogleAuthProvider();
+  
 
   const Login_with_google = async () => {
     try {
 
       Dispatch(Login_Request());
       // Add YouTube scope
+      const provider = new GoogleAuthProvider();
+       // Add YouTube force-ssl scope for full access
       provider.addScope("https://www.googleapis.com/auth/youtube.force-ssl");   //The scope is used to request permissions from the user to access their YouTube account. 
       
       // Sign in with Google
       const result = await signInWithPopup(auth, provider);
-      const user = result.user;
 
-      const accessToken = user.accessToken;
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+
+      // Set user and token in state
+
+      const user = result.user;
+      const accessToken = credential.accessToken;
+      console.log(user)
       const profile = {
         username: user.displayName,
         profile_photo: user.photoURL
@@ -203,7 +210,7 @@ const Login = () => {
 
       // Save session data synchronously
       sessionStorage.setItem("user_session", accessToken);
-      sessionStorage.setItem("name", profile.username);
+      sessionStorage.setItem("name", profile);
 
       // Update local state (optional but not necessary for sessionStorage)
       setSession(accessToken);

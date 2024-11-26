@@ -61,7 +61,7 @@ function Recommended_video({ categoryId = 0 }) {
     const navigate = useNavigate();
 
     return (
-        <div className='recommended basis-[28%] flex flex-col gap-2'>
+        <div className='recommended sm:flex-[28%] flex-[100%] flex flex-col gap-2'>
             {video_feed_data &&
             <InfiniteScroll
             dataLength={video_feed_data.length}
