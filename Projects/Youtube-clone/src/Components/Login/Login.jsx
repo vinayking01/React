@@ -180,9 +180,6 @@ const Login = () => {
   const db = getFirestore(app);
   const provider = new GoogleAuthProvider();
 
-  
-
-
   const Login_with_google = async () => {
     try {
 

@@ -160,7 +160,7 @@ export const Feeds = ({ category = 0, search, small_sidebar }) => {
                 className="card p-2 shadow-xl rounded"
                 onClick={() =>
                   navigate(
-                    `/video/${category}/${search ? data.id.videoId : data.id}/${data.snippet.channelId
+                    `/watch/${category}/${search ? data.id.videoId : data.id}/${data.snippet.channelId
                     }`,
                     { replace: true }
                   )

@@ -1,0 +1,33 @@
+.play-container{
+    margin-left: 162px;
+    padding-right: 3%;
+    padding-bottom: 20px;
+    padding-left: 2%;
+    width: 90%;
+}
+
+.play-large-container{
+    padding-left : 3%;
+    margin-left : 2%;
+    margin-right : 2%;
+    width : 97%;
+} 
+
+
+@media screen and (max-width: 640px) {
+    .play-container{
+        margin: auto;
+        padding-left:0px ;
+        padding-right: 0px;
+        margin-left: 0px;
+        
+    }
+
+    .play-large-container{
+        margin: auto;
+        padding-left : 0%;
+    }
+
+
+}
+   

@@ -9,6 +9,7 @@ import { app } from "../../firebase_configuration";
 import { getAuth } from 'firebase/auth';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const categories = [
   { id: 0, icon: home, name: 'Home' },
@@ -30,9 +31,17 @@ function Sidebar_box({ small_sidebar, category, setCategory, setQuery , setSideb
     navigate('/login');  // Navigate to login if no accessToken
   }
   
+  useEffect(() => {
+
+      if (window.innerWidth < 640) {
+        setSidebar(true);
+      } else {
+        setSidebar(false);
+      }
+  }, []);
 
   return (
-    <div className={`sidebar w-[200px] ml-0 h-[100vh] z-[10] fixed top-16 pl-4 pt-1 mt-4 bg-white ${small_sidebar ? "small-sidebar" : ""}`}>
+    <div className={`sidebar w-[200px] ml-0 h-[100vh] z-[10] fixed top-16 pl-4 pt-4 bg-white ${small_sidebar ? "small-sidebar" : ""}`}>
       <div className="shortcut-links">
         {categories.map((cat) => (
           <div
