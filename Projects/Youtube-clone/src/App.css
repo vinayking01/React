@@ -4,3 +4,7 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
+
+.lazy-load-image-background {
+  display: block !important ; 
+}

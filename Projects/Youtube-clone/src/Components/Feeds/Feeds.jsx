@@ -5,119 +5,156 @@ import moment from 'moment';
 import jack from '../../assets/jack.png'; // Placeholder image for channel
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { v4 as uuidv4 } from 'uuid';
+import Sidebar_box from '../SideBar/Sidebar';
+import axios from 'axios';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
-export const Feeds = ({ category = 0, search, small_sidebar }) => {
+export const Feeds = ({ small_sidebar ,setSidebar} ) => {
+  const [category , setCategory] = useState(0);
   const [videoFeedData, setVideoFeedData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [nextFeedToken, setFeedToken] = useState(null);
   const [duration, Setduration] = useState([]);
-  const [searching_query, setSearch] = useState(search)
+
 
   const navigate = useNavigate();
   // console.log("we have data",videoFeedData)
 
-  // Initial fetch
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-
-      const url = (search)
-        ? `https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&eventType=none&type=video&maxResults=10&q=${search}&key=${import.meta.env.VITE_YOUTUBE_APIKEY}`
-        : `https://www.googleapis.com/youtube/v3/videos?part=snippet&part=statistics&type=video&part=contentDetails&chart=mostPopular&maxResults=10&key=${import.meta.env.VITE_YOUTUBE_APIKEY}`;
-      // console.log(url)
-      const response = await fetch(url);
-      if (!response.ok) {
-        // Handle specific HTTP errors based on status code
-        if (response.status === 403) {
-          throw new Error("Access is forbidden. Please check your API key or permissions.");
-        } else {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+      // Base API URL and API Key
+      const API_KEY = import.meta.env.VITE_API_KEY;
+      const BASE_URL = "https://www.googleapis.com/youtube/v3";
+  
+      // Step 1: Fetch initial video data
+      const videoFeedResponse = await axios.get(`${BASE_URL}/videos`, {
+        params: {
+          part: "snippet,statistics,contentDetails",
+          chart: "mostPopular",
+          maxResults: 10,
+          key: API_KEY,
+        },
+      });
+  
+      const videoFeedData = videoFeedResponse.data;
+      const videoItems = videoFeedData.items || [];
+  
+      // Step 2: Extract video IDs
+      const videoIds = videoItems.map((item) => item.id).join(",");
+  
+      if (!videoIds) {
+        throw new Error("No video IDs found. Cannot fetch details.");
       }
-      const data = await response.json();
-      // console.log(":intitla ", data.items)
-      if (search) {
-        // Step 2: Extract video IDs
-
-        const videoIds = await data.items.map((item) => item.id.videoId).join(',');
-        // console.log(videoIds)
-        // Step 3: Fetch video details (duration)
-        const videosUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoIds}&key=${import.meta.env.VITE_YOUTUBE_APIKEY}`;
-        const videosResponse = await fetch(videosUrl);
-        const videosData = await videosResponse.json();
-        // console.log(videosData)
-        if (!videosResponse.ok) throw new Error(videosData.error.message);
-
-        // Combine search results with duration
-        const resultsWithDuration = data.items.map((item, index) => {
-          const videoDetails = videosData.items.find((video) => video.id === item.id.videoId);
-          return {
-            ...item,
-            duration: videoDetails?.contentDetails?.duration || 'Unknown',
-          };
-        });
-        // console.log("duration", resultsWithDuration)
-        Setduration(resultsWithDuration)
-
-      }
-
-      // console.log("Initial fetched", search, url);
-      setFeedToken(data.nextPageToken); // Set the next page token
-      setVideoFeedData(data.items || []);
+  
+      // Step 3: Fetch video details (duration)
+      const videoDetailsResponse = await axios.get(`${BASE_URL}/videos`, {
+        params: {
+          part: "contentDetails",
+          id: videoIds,
+          key: API_KEY,
+        },
+      });
+  
+      const videoDetailsData = videoDetailsResponse.data;
+      const videoDetailsMap = videoDetailsData.items.reduce((map, video) => {
+        map[video.id] = video.contentDetails;
+        return map;
+      }, {});
+  
+      // Step 4: Combine search results with duration details
+      const resultsWithDuration = videoItems.map((item) => ({
+        ...item,
+        duration: videoDetailsMap[item.id]?.duration || "Unknown",
+      }));
+  
+      // Update states with fetched data
+      setFeedToken(videoFeedData.nextPageToken || null);
+      setVideoFeedData(videoItems);
+      Setduration(resultsWithDuration);
     } catch (err) {
-      console.error('Error fetching API data:', err);
+      // Handle error and display specific messages
+      if (axios.isAxiosError(err)) {
+        console.error("Axios error:", err.response?.data?.error?.message || err.message);
+      } else {
+        console.error("Error fetching API data:", err.message);
+      }
     } finally {
       setLoading(false);
     }
-  }, [category,search]);
-  console.log("search value", search)
+  }, [category]);
+
   useEffect(() => {
-    console.log("inside")
+    // console.log("inside")
     fetchData();
     window.scrollTo(0, 0);
-  }, [search]);
+  }, []);
 
   // Fetch more data on scroll
   const fetchMoreFeed = async () => {
-    if (!nextFeedToken) return;
+    if (!nextFeedToken) return; // Exit if no token is available
+  
     try {
-      const url = (search)
-        ? `https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&eventType=none&type=video&chart=mostPopular&maxResults=10&pageToken=${nextFeedToken}&q=${search}&key=${import.meta.env.VITE_YOUTUBE_APIKEY}`
-        : `https://www.googleapis.com/youtube/v3/videos?part=snippet&part=statistics&type=video&part=contentDetails&chart=mostPopular&maxResults=10&pageToken=${nextFeedToken}&videoCategoryId=${category}&key=${import.meta.env.VITE_YOUTUBE_APIKEY}`;
-
-      const response = await fetch(url);
-      const data = await response.json();
-
-      if (search) {
-        // Step 2: Extract video IDs
-        // console.log(data.items)
-        const videoIds = await data.items.map((item) => item.id.videoId).join(',');
-        // console.log(videoIds)
-        // Step 3: Fetch video details (duration)
-        const videosUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoIds}&key=${import.meta.env.VITE_YOUTUBE_APIKEY}`;
-        const videosResponse = await fetch(videosUrl);
-        const videosData = await videosResponse.json();
-        // console.log(videosData)
-        if (!videosResponse.ok) throw new Error(videosData.error.message);
-
-        // Combine search results with duration
-        const resultsWithDuration = data.items.map((item, index) => {
-          const videoDetails = videosData.items.find((video) => video.id === item.id.videoId);
-          return {
-            ...item,
-            duration: videoDetails?.contentDetails?.duration || 'Unknown',
-          };
-        });
-        // console.log("duration", resultsWithDuration)
-        Setduration((prev) => [...prev, ...resultsWithDuration])
-
+      // Base API URL and API Key
+      const API_KEY = import.meta.env.VITE_API_KEY;
+      const BASE_URL = "https://www.googleapis.com/youtube/v3";
+  
+      // Step 1: Fetch more video data
+      const videoFeedResponse = await axios.get(`${BASE_URL}/videos`, {
+        params: {
+          part: "snippet,statistics,contentDetails",
+          chart: "mostPopular",
+          maxResults: 10,
+          pageToken: nextFeedToken,
+          videoCategoryId: category,
+          key: API_KEY,
+        },
+      });
+  
+      const videoFeedData = videoFeedResponse.data;
+      const videoItems = videoFeedData.items || [];
+  
+      // Step 2: Extract video IDs
+      const videoIds = videoItems.map((item) => item.id).join(",");
+      if (!videoIds) {
+        throw new Error("No video IDs found. Cannot fetch details.");
       }
-
-      // console.log("when again fetched", data);
-      setFeedToken(data.nextPageToken || null); // Update the token or null if none
-      setVideoFeedData((prev_data) => [...prev_data, ...(data.items || [])]);
-    } catch (error) {
-      console.error('Error fetching more feed data:', error);
+  
+      // Step 3: Fetch video details (duration)
+      const videoDetailsResponse = await axios.get(`${BASE_URL}/videos`, {
+        params: {
+          part: "contentDetails",
+          id: videoIds,
+          key: API_KEY,
+        },
+      });
+  
+      const videoDetailsData = videoDetailsResponse.data;
+      const videoDetailsMap = videoDetailsData.items.reduce((map, video) => {
+        map[video.id] = video.contentDetails;
+        return map;
+      }, {});
+  
+      // Step 4: Combine search results with duration details
+      const resultsWithDuration = videoItems.map((item) => ({
+        ...item,
+        duration: videoDetailsMap[item.id]?.duration || "Unknown",
+      }));
+  
+      // Update states with new data
+      setFeedToken(videoFeedData.nextPageToken || null);
+      setVideoFeedData((prevData) => [...prevData, ...videoItems]);
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        if (err.response?.status === 403 && err.response?.data?.error?.message.includes("quota")) {
+          console.error("YouTube API quota exceeded. Please try again later or use a different API key.");
+        } else {
+          console.error("Axios error:", err.response?.data?.error?.message || err.message);
+        }
+      } else {
+        console.error("Error fetching more feed data:", err.message);
+      }
     }
   };
 
@@ -139,12 +176,13 @@ export const Feeds = ({ category = 0, search, small_sidebar }) => {
     const seconds = match[3] ? parseInt(match[3]) : 0; // Extract seconds or set to 0 if missing
 
     return `${hours > 0 ? hours + ':' : ''}${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    return " ; "
-    console.log("duration", resultsWithDuration);
+   
 
   }
   return (
-    <div className="w-[100%] rel">
+
+    <div>
+  <div className="w-[100%] rel">
       {videoFeedData && (
         <InfiniteScroll
           dataLength={videoFeedData.length}
@@ -160,19 +198,22 @@ export const Feeds = ({ category = 0, search, small_sidebar }) => {
                 className="card p-2 shadow-xl rounded"
                 onClick={() =>
                   navigate(
-                    `/watch/${category}/${search ? data.id.videoId : data.id}/${data.snippet.channelId
+                    `/watch/${category}/${data.id}/${data.snippet.channelId
                     }`,
                     { replace: true }
                   )
                 }
               >
                 <div className='relative'>
-                  <img
-                    src={data.snippet.thumbnails.medium.url}
-                    alt={data.snippet.title}
-                    className="thumbnail"
-                  />
-                  <span className='absolute bottom-1 right-1 bg-black text-white p-2'>{!search ? ( data.contentDetails ? parseISODuration(data.contentDetails.duration):"") : duration.length > 0 ? parseISODuration(duration[index].duration) : ""}</span>
+                <LazyLoadImage
+                    effect="blur"
+                    wrapperProps={{
+                      // If you need to, you can tweak the effect transition using the wrapper style.
+                      style: {transitionDelay: "0.3s"},
+                  }}
+                  src={data.snippet.thumbnails.medium.url} className="thumbnail"/>
+            
+                  <span className='absolute bottom-1 right-1 bg-black text-white p-2'>{ data.contentDetails ? parseISODuration(data.contentDetails.duration):""}</span>
                 </div>
                 <h2 className="font-sans">
                   {data.snippet.title.length < 35
@@ -181,21 +222,22 @@ export const Feeds = ({ category = 0, search, small_sidebar }) => {
                 </h2>
                 <div className="flex flex-row content-center align-center justify-between">
                   <div className="flex flex-row place-items-center gap-1">
-                    <img
-                      src={jack}
-                      alt="Channel"
-                      className="rounded-[50%] mx-[2px] w-[25px] h-[25px]"
-                    />
+                    
+                  <LazyLoadImage
+                    effect="blur"
+                    wrapperProps={{
+                    // If you need to, you can tweak the effect transition using the wrapper style.
+                        style: {transitionDelay: "1s"},
+                    }}
+                       src={jack} className="rounded-[50%] mx-[2px] w-[25px] h-[25px]"/>
                     <h4 className="font-serif text-sm">
                       {data.snippet.channelTitle}
                     </h4>
                   </div>
-                  {!search && (
                     <p>
                       { data.statistics && formattedViews(data.statistics.viewCount)} &bull;{' '}
                       {data.snippet && moment(data.snippet.publishedAt).fromNow()}
                     </p>
-                  )}
                 </div>
               </div>
             ))}
@@ -209,5 +251,7 @@ export const Feeds = ({ category = 0, search, small_sidebar }) => {
         </div>
       )}
     </div>
+    </div>
+  
   );
 };

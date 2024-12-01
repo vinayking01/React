@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import menu_icon from '../../assets/menu.png';
 import Youtube_logo from '../../assets/logo.png';
 import upload from '../../assets/upload.png';
@@ -6,13 +6,19 @@ import more_logo from '../../assets/more.png';
 import notification from '../../assets/notification.png';
 import profile from '../../assets/user_profile.jpg';
 import search_icon from '../../assets/search.png';
+import { setSideCategory } from '../../Store/SideCateogrySlice';
+import { useDispatch } from 'react-redux';
+import {Query_Request , Query_success} from '../../Store/QuerySlice'
 import './Navbar.css';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { stringify } from 'uuid';
+import { useSelector } from 'react-redux';
 
 function Navbar({ setSidebar }) {
-  const [query, setQuery] = useState('');
+  const query= useSelector((state) => state.query.value);
   const navigate = useNavigate();
+  const profile = JSON.parse(sessionStorage.getItem('profile')).profile_photo;
+  const Dispatch = useDispatch();
 
   // Memoized function to handle search logic
   const findSearch = useCallback(() => {
@@ -27,8 +33,11 @@ function Navbar({ setSidebar }) {
     }
   };
 
+  useEffect(()=>{
+    Dispatch(Query_success(''));
+  },[])
 
- 
+  // console.log(profile)
 
   return (
     <div>
@@ -40,7 +49,12 @@ function Navbar({ setSidebar }) {
             className="menu-icon"
             onClick={() => setSidebar((prev) => !prev)}
           />
-          <Link to="/" className="w-[auto]" onClick={()=>{setQuery(" ")}}>
+          <Link to="/" className="w-[auto]" onClick={()=>{
+            // setQuery(" ")
+            Dispatch(Query_Request());
+            Dispatch(Query_success(''))
+            Dispatch(setSideCategory(null))
+          }}>
             <img src={Youtube_logo} alt="YouTube Logo" className="logo w-[50%]" />
           </Link>
         </div>
@@ -50,7 +64,12 @@ function Navbar({ setSidebar }) {
             type="text"
             placeholder="Search"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              // setQuery(e.target.value)
+              Dispatch(Query_Request());
+              Dispatch(Query_success(e.target.value))
+              Dispatch(setSideCategory(null))
+            }}
             onKeyDown={handleKeyDown} // Handle Enter key
             className="pr-9 text-1xl bg-transparent outline-none w-[400px] placeholder:text-black"
           />
@@ -62,11 +81,11 @@ function Navbar({ setSidebar }) {
           />
         </div>
 
-        <div className="nav-right flex items-center justify-end gap-4">
+        <div className="nav-right flex items-center justify-end sm:gap-4 gap-1">
           <img src={upload} alt="Upload Icon" />
           <img src={more_logo} alt="More Options Icon" />
           <img src={notification} alt="Notification Icon" />
-          <img src={profile} alt="User Profile" />
+          <img src={profile} alt="User Profile" className='border-black rounded-full border-2'/>
         </div>
       </nav>
     </div>

@@ -6,23 +6,26 @@ import blogs from '../../assets/blogs.png';
 import history from '../../assets/history.svg';
 import library from '../../assets/library.png';
 import { app } from "../../firebase_configuration";
-import { getAuth } from 'firebase/auth';
-import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { setSideCategory } from '../../Store/SideCateogrySlice';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const categories = [
-  { id: 0, icon: home, name: 'Home' },
-  { id: 1, icon: blogs, name: 'Subscriptions' },
-  { id: 2, icon: like, name: 'Liked Videos' },
-  { id: 3, icon: history, name: 'History' },
-  { id: 4, icon: library, name: 'Library' }
+const Sidecategories = [
+  { value: 0, icon: home, name: 'Home', slug: ''},
+  { value: 1, icon: blogs, name: 'Subscriptions', slug: 'subscription'},
+  { value: 2, icon: like, name: 'Liked Videos', slug: 'Likedvideos' },
+  { value: 3, icon: history, name: 'History', slug: 'history'},
+  { value: 4, icon: library, name: 'Library' }
 
 ];
 
 
-function Sidebar_box({ small_sidebar, category, setCategory, setQuery , setSidebar}) {
+function Sidebar_box({ small_sidebar, setSidebar}) {
   const navigate  =  useNavigate();
+  const Dispatch = useDispatch();
+  const SideCategory = useSelector((state) => state.sideCategory.value);
 
   const Logout = () => {
 
@@ -43,14 +46,15 @@ function Sidebar_box({ small_sidebar, category, setCategory, setQuery , setSideb
   return (
     <div className={`sidebar w-[200px] ml-0 h-[100vh] z-[10] fixed top-16 pl-4 pt-4 bg-white ${small_sidebar ? "small-sidebar" : ""}`}>
       <div className="shortcut-links">
-        {categories.map((cat) => (
+        {Sidecategories.map((cat) => (
           <div
-            key={cat.id}
-            className={`sidelinks ${category === cat.id ? 'active' : ''}`}
+            key={cat.value}
+            className={`sidelinks ${SideCategory === cat.value ? 'active' : ''}`}
             onClick={() => {
-              setCategory(cat.id);
-              setQuery("");  // Reset query when a category is selected
-              setSidebar((prev) => !prev)
+              // setCategory(cat.id);
+              Dispatch(setSideCategory(cat.value))
+              navigate(`/${cat.slug}`);
+             
             }}
           >
             <img src={cat.icon} alt={cat.name} />
