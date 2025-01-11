@@ -31,7 +31,7 @@ function App() {
       <div className='w-full block'>
         <Header />
         <main>
-        <Outlet />
+        <Outlet />   {/* All home, login , logout or remaining routes mounts here*/}
         </main>
         
         <Footer />

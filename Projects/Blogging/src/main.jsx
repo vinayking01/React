@@ -21,11 +21,11 @@ import AllPosts from "./pages/AllPosts";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-    children: [
+    element: <App />,  // this wll be the entry point for the all pages , component of your apps
+    children: [   // these all are child which mounts as per the requests.
         {
             path: "/",
-            element: <Home />,
+            element: <Home />,   
         },
         {
             path: "/login",

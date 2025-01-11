@@ -39,6 +39,7 @@ export default class News extends Component {
       progress : 40                 // making the progress bar to reach 40 , then later 70, then at last 100
     });
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${import.meta.env.VITE_NEWS_API_KEY}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    
     let data = await fetch(url);
     this.setState({ 
       progress : 70
@@ -54,15 +55,17 @@ export default class News extends Component {
     });
   }
 
+
   fetchMoreData = async () => {
     setTimeout(()=>{
       this.setState({ page: this.state.page + 1 }, async () => {
         let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${import.meta.env.VITE_NEWS_API_KEY}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+        console.log(url)
         this.setState({ loading: true });
         let data = await fetch(url);
         let parsedData = await data.json();
         this.setState({
-          articles: this.state.articles.concat(parsedData.articles),
+          articles: (this.state.articles) ?this.state.articles.concat(parsedData.articles): (this.state.articles),
           loading: false,
         });
       });
@@ -71,8 +74,8 @@ export default class News extends Component {
   };
 
   render() {
-    return (
-
+    return (  
+      
       <div className="container my-3 border border-warning center ">
       <LoadingBar
         color='#f11946'
@@ -84,15 +87,15 @@ export default class News extends Component {
         </h1>
         {this.state.loading && <SpinnerBar />}
         <InfiniteScroll
-          dataLength={this.state.articles.length}
+          dataLength={(this.state.articles)?this.state.articles.length:0}
           next={this.fetchMoreData}
-          hasMore={this.state.articles.length !== this.state.totalArticles}
+          hasMore={(this.state.articles)? (this.state.articles.length !== this.state.totalArticles): false}
           loader={<SpinnerBar />} style={{overflowX:"hidden"}}
         >
           <div className="row" style={{marginTop:"20px"}}>     {/* Row */} 
             <div>
               </div>            
-            {this.state.articles.map((element, index) => {
+            {(this.state.articles) && this.state.articles.map((element, index) => {
               return (
                 <div key={element.url + index} className="col-md-4">
                   <NewsItem

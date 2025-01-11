@@ -30,8 +30,8 @@ const MyRouter = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <createBrowserRouter>
+
       <RouterProvider router={MyRouter} />
-    </createBrowserRouter>
+
   </React.StrictMode>
 )

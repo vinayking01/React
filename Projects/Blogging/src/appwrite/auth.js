@@ -31,9 +31,9 @@ export class Authservice {
                 return userAccount;
             }
         } catch (err) {
-            console.error('Error creating account:', err.message); // Log the error details
+            console.error('Error in creating Your account account:', err.message); // Log the error details
             // Handle the error accordingly, like displaying a message to the user
-            throw err;
+            // throw err;
         }
     }
     
@@ -47,8 +47,8 @@ export class Authservice {
             );
             return session;
         } catch (err) {
-            console.error('Error creating account:', err.message); // error during logging
-            throw err;
+            console.error("lOgin failed ", err); // error during logging
+            // throw err;
         }
     }
 
@@ -58,8 +58,8 @@ export class Authservice {
             const user = await this.account.get();
             return user;
         } catch (err) {
-            console.log(err)
-            throw err;
+            console.log("user not exist")
+            // throw err;
         }
     }
 
@@ -72,8 +72,8 @@ export class Authservice {
         }
         catch(err)
         {
-            console.log(err)
-            throw err;
+            console.log("error in logout ",err)
+            // throw err;
         }
     }
 }

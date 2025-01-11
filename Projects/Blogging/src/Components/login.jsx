@@ -22,7 +22,8 @@ export function Login() {
             if (session) {
                 const userData = await authService.getCurrentUser()
                 if(userData) dispatch(authLogin(userData));
-                navigate("/")  // when you want to trigger a navigation based on some event, like logging to to programmatically navigate to another route. 
+                console.log("route to all posts")
+                navigate("/all-posts")  // when you want to trigger a navigation based on some event, like logging to to programmatically navigate to another route. 
             }
         } catch (error) {
             setError(error.message)
