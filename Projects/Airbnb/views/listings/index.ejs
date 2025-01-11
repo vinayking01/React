@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listings</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <header>
+        <h1>Airbnb Listings</h1>
+    </header>
+    <form method="GET" action="/listings/new">
+        <button type="submit">Add New Listing</button>
+    </form>
+    <main>
+        <ul>
+            <% alllistings.forEach(function(listing) { %>
+                <li>
+                    <a
+                        href="/listings/<%= listing.id %>"
+                        class="btn btn-primary active"
+                        ><h4><%= listing.title %></h4></a>
+                </li>
+            <% }); %>
+        </ul>
+    </main>
+    <footer>
+        <p>&copy; 2023 Airbnb</p>
+    </footer>
+</body>
+</html>
