@@ -1,0 +1,52 @@
+<% layout('layouts/boilerplate') %>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-header text-center bg-primary text-white">
+            <h3>Signup Form</h3>
+          </div>
+          <div class="card-body">
+            <form action="/signup" method="POST" class="needs-validation">
+              <!-- Name Input -->
+              <div class="mb-3">
+                <label for="username" class="form-label">UserName</label>
+                <input type="text" class="form-control" name="username" id="name" placeholder="Enter your name" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+              </div>
+
+              <!-- Email Input -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+              </div>
+
+              <!-- Password Input -->
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+              </div>
+
+              <!-- Signup Button -->
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+              </div>
+            </form>
+          </div>
+          <!-- <form action="/login" method="get">
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+          </form> -->
+        </div>
+      </div>
+    </div>
+  </div>

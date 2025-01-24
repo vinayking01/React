@@ -2,11 +2,12 @@
 
 ## Form Methods
 
-In HTML, forms support only two methods: `GET` and `POST`. These methods define how data is sent to the server.
+In HTML, forms support only two methods: `GET` and `POST`. These methods define how data is sent to the server side or even same situation in client side.
 
-## Handling Other HTTP Methods
+## Handling Other HTTP Methods 
 
-When handling form submissions on the server side, sometimes you need to use HTTP methods other than `GET` and `POST`, such as `PUT` or `DELETE`. This can be achieved by using a hidden input field to override the method.
+- When handling form submissions on the server side, sometimes you need to use HTTP methods other than `GET` and `POST`, such as `PUT` or `DELETE`. This can be achieved by using a hidden input field to override the method.
+- in server side the Express does
 
 ### Example
 

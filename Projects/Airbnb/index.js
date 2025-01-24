@@ -1,9 +1,17 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
-const Listing = require('./Models/listing_schema'); // Import the schema
 const path = require('path');
 const methodOverride = require('method-override');
+const ejsMate = require('ejs-mate')
+const listings_routes = require('./routes/listing_routes');
+const reviews_routes = require('./routes/review_routes');
+const user_routes = require('./routes/user_routes')
+const session = require('express-session');
+const flash  = require('connect-flash')
+const passport = require('passport');
+const LocalStrategy  = require('passport-local');
+const User = require('./Models/user_schema')
 
 // Your server code here
 const app = express();
@@ -15,69 +23,63 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected...'))
     .catch(err => console.log(err));
 
+
+app.use(express.static(path.join(__dirname, 'Public'))); // Serve the public folder as static files
 // Middleware
 app.use(express.urlencoded({ extended: true }));
-// override with POST having ?_method=DELETE . Middleware to override the method based on query parameter because HTML forms do not support PUT, PATCH, or DELETE requests on server side.
+// method override with POST having ?_method=DELETE . Middleware to override the method based on query parameter because HTML forms do not support PUT, PATCH, or DELETE requests on server side.
 app.use(methodOverride('_method'));
 // Set the view engine to ejs
 app.set('view engine', 'ejs');
 // Set the directory for ejs files
 app.set('views', path.join(__dirname, 'views'));
+// use ejs-locals for all ejs templates:
+app.engine('ejs', ejsMate);
+
+// session middleware
+app.use(session({           
+    secret: 'Airbnb 123', 
+    resave: false,             
+    saveUninitialized: true,   
+}));
+
+app.get('/',(req,res) =>{
+    res.send("hello world");
+})
+
+app.use(passport.initialize())  // a middleware to initialize the passport
+app.use(passport.session());//
+// use static authenticate method of model in LocalStrategy
+passport.use(new LocalStrategy(User.authenticate()));
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// flash middleware
+app.use(flash())  
+app.use((req,res,next)=>{     
+    res.locals.success = req.flash("success"); // this way we provided the success variable to the every template instead of passing in templates like ejs.
+    res.locals.failure = req.flash("failure");
+    res.locals.currentUser = req.user; // store the users whose session is currently logged in
+    next();
+})
 
 
+// Listing handling
+app.use('/listings',listings_routes);
 
-app.get('/', (req, res) => {
-    res.render('listings/home.ejs');
-});
+// Review handling
+app.use('/listings/:id/reviews',reviews_routes);
 
-// Index Route
-app.get('/listings', async (req, res) => {
-    const alllistings = await Listing.find();
-    res.render('listings/index.ejs', { alllistings });    
-});
+// User authentication handling
+app.use('/',user_routes);
 
-// New Route
-app.get('/listings/new/', async (req, res) => {
-    res.render('listings/new.ejs');
-});
+// handling custom error and replacing by default middleware added automatically by express
+app.use((err, req, res, next) => {      
+    res.status(err.status || 500);      
+    res.render('listings/error.ejs', { error: err });   
+});  
 
-// Show Route
-app.get('/listings/:id', async (req, res) => {
-    const {id} = req.params;
-    const listingItem = await Listing.findById(id);
-    res.render('listings/show.ejs',{listing :listingItem});
-    // res.send('This is the listing with id: ' + id);
-});
-
-// Create new listing
-app.post('/listings', async (req, res) => {
-    const newListing = new Listing(req.body);
-    await newListing.save();
-    res.redirect(`/listings/${newListing._id}`);
-});
-
-// edit route
-app.get('/listings/:id/edit', async (req, res) => {
-    const {id} = req.params;
-    const listingItem = await Listing.findById(id);
-    res.render('listings/edit.ejs',{listing :listingItem});
-});
-
-
-// Update route
-app.put('/listings/:id', async (req, res) => {
-const {id} = req.params;
-console.log(req.body);
-const listingItem = await Listing.findByIdAndUpdate(id, req.body.listing, { new: true, runValidators: true });
-res.render('listings/show.ejs',{listing :listingItem});
-});
-
-// Delete route
-app.delete('/listings/:id', async(req,res)=>{
-    const {id} = req.params;
-    await Listing.findByIdAndDelete(id);
-    res.redirect('/listings');
-});
 
 app.listen(3000, () => {
     console.log(`Server is running on port 3000`);

@@ -1,107 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Listing</title>
-    <style>
-        .body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: auto;
-            padding: 0;
-            text-align: center;
-            height: 100vh;
-        }
+<% layout('layouts/boilerplate') %>
+<% block('head').append('<link rel="stylesheet" href="/new.css">') %>
 
-        h1 {
-            color: #333;
-        }
-
-        form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-            margin: auto;
-        }
-
-        div {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-            
-        }
-
-        input[type="text"],
-        input[type="number"],
-        input[type="url"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #28a745;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #218838;
-        }
-
-        @media (max-width: 600px) {
-            form {
-                padding: 15px;
-            }
-
-            h1 {
-                font-size: 24px;
-            }
-        }
-    </style>
-</head>
 <body style="text-align: center;">
     <h1>Create a New Listing item</h1>
     <div class=".body">
-    <form action="/listings" method="POST">
+    <form action="/listings" class="needs-validation" method="POST" novalidate>
         <div>
             <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required>
+            <input type="text" id="title" class="form-control" name="title" required placeholder="Enter the title of your listing">
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please provide the title!
+            </div>
         </div>
         <div>
             <label for="description">Description:</label>
-            <textarea id="description" name="description" ></textarea>
+            <textarea id="description" name="description" class="form-control" required placeholder="Describe your item"></textarea>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please provide the Description!
+            </div>
         </div>
-        <div>
+        <div>   
             <label for="price">Price:</label>
-            <input type="number" id="price" name="price" >
+            <input type="string" id="price" name="price" class="form-control" required placeholder="Enter the price">
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please provide the Price!
+            </div>
         </div>
         <div>
             <label for="location">Location:</label>
-            <input type="text" id="location" name="location" >
+            <input type="text" id="location" name="location" class="form-control" required placeholder="Enter your city and country (e.g., New York, USA)">
+            <div class="invalid-feedback">
+                Please provide the Location!
+            </div>
         </div>
         <div>
             <label for="image">Image URL:</label>
-            <input type="url" id="image" name="image">
+            <input type="url" id="image" name="image" class="form-control" required placeholder="Enter the image URL (e.g., http://example.com/image.jpg)">
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please provide a valid image link.
+            </div>
         </div>
         <button type="submit">Create Listing</button>
     </form>
 </div>
 </body>
-</html>
