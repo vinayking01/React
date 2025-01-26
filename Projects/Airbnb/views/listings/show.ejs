@@ -1,27 +1,38 @@
+
 <% layout('layouts/boilerplate') %>
     <% block('head').append('<link rel="stylesheet" href="/show.css">') %>
-
+    <!-- <% block('head').append('<link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps.css">') %> -->
+    <% block('head').append('<link rel="stylesheet" type="text/css"href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />') %>
+     
         <body>
             <div class="container ">
-                <div style="width: 300px; max-height: 300px;">
-                    <img src="<%= listing.image %>" alt="<%= listing.title %>" class="listing-image">
+                <div style="display: flex; flex-direction: row;">
+                  <div style="width: 300px; max-height: 330px; ">
+                    <img src="<%= listing.image.url %>" alt="<%= listing.title %>" class="listing-image">
+                    <br> <br>
                     <caption><i> Owned By : <%= listing.owner.username %>
                     </i></caption>
+                  </div>
                 </div>
                 <div class="listing-details">
                     <h1>
                         <%= listing.title %>
                     </h1>
-                    <p class="price">$<%= listing.price %>
+                    <div>
+                      <strong >Price:</strong>
+                      <p class="price" style="display: inline-block;">$<%= listing.price %>
+                    </div>
                     </p>
                     <p><strong>Location:</strong>
-                        <%= listing.location %>, <%= listing.country %>
+                       <%= listing.postalCode%> <%= listing.location %>, <%= listing.country %>
                     </p>
                 </div>
-                <p>
+                <div>
+                  <strong>About Description:</strong>
+                  <p style="display: inline-block;">
                     <%= listing.description %>
                 </p>
-
+                </div>
                 <div style="display: flex;">
                     <form method="get" action="/listings">
                         <button type="submit" style="font-size: medium;">Go back to list</button>
@@ -35,15 +46,32 @@
                     </form>
                     <% } %>
                 </div>
-                <% if(currentUser) { %>
+                <div>
+                  <div id="map" style="width: 100%; height: 300px; ">
+                   Your destination is here
+                  </div>
+                </div>
+                <br>
+                <!-- <% if(currentUser) { %> -->
                 <div class="Comment-review-form">
                     <hr />
                     <h4>Leave a Review</h4>
-                    <form action="/listings/<%= listing.id %>/reviews" method="post">
-                        <div class="">
-                            <label for="rating" class="form-label">Rating</label>
-                            <input type="range" class="form-control-range" id="rating" name="rating" min="1" max="5"
-                                required>
+                    <form action="/listings/<%= listing.id %>/reviews" method="post" required>
+                      <div class="">
+                        Rating
+                        <fieldset class="starability-slot">
+                          <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked aria-label="No rating." />
+                          <input type="radio" id="first-rate1" name="rating" value="1" />
+                          <label for="first-rate1" title="Terrible">1 star</label>
+                          <input type="radio" id="first-rate2" name="rating" value="2" />
+                          <label for="first-rate2" title="Not good">2 stars</label>
+                          <input type="radio" id="first-rate3" name="rating" value="3" />
+                          <label for="first-rate3" title="Average">3 stars</label>
+                          <input type="radio" id="first-rate4" name="rating" value="4" />
+                          <label for="first-rate4" title="Very good">4 stars</label>
+                          <input type="radio" id="first-rate5" name="rating" value="5" />
+                          <label for="first-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
                         </div>
 
                         <div class="">
@@ -55,7 +83,7 @@
                     </form>
 
                 </div>
-                <% } %>
+                <!-- <% } %> -->
                 <div class="Reviews mt-4">
                     <div class="card p-3 shadow-sm">
                       <h4 class="mb-4 text-primary">All Ratings</h4>
@@ -63,12 +91,10 @@
                         <div class="d-flex align-items-start mb-3 p-3 border-bottom bg-light rounded">
                           <!-- Rating Section -->
                           <div class="me-3 text-center">
-                            <span>Author : @<%= review.author.username %></span> <br>
-                            <span class="badge bg-success mb-1" style="font-size: 1rem;">
-                              <%= review.rating %> Stars
-                            </span>
-                            <br>
                             <small class="text-muted">Rating</small>
+                            <p class="starability-result" data-rating="<%= review.rating %>" >
+                            </p>
+                            <span>Author : @<%= review.author.username %></span>
                           </div>
                   
                           <!-- Comment Section -->
@@ -89,8 +115,50 @@
                         </div>
                       <% }) %>
                     </div>
-                  </div>
-                  
-            </div>
+                </div>
 
+            </div>
+                <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+                <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+                <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+                <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+                <script>
+                  const platform = new H.service.Platform({ apikey:"<%= key %>" });
+                  const defaultLayers = platform.createDefaultLayers();
+                  let x = "<%= centerX %>";
+                  let y = "<%= centerY %>";
+                  const map = new H.Map(
+                    document.getElementById("map"),
+                
+                    defaultLayers.vector.normal.map,
+                    {
+                      center: { lat: x , lng: y },
+                      zoom: 12,
+                      pixelRatio: window.devicePixelRatio || 1,
+                    }
+                  );
+                  window.addEventListener("resize", () => map.getViewPort().resize());
+                  const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+                  const ui = H.ui.UI.createDefault(map, defaultLayers);
+            
+                  // Marker code goes here
+            
+                  var LocationOfMarker = { lat: x, lng: y };
+            
+                    // optionally - resize a larger PNG image to a specific size
+                    var pngIcon = new H.map.Icon("<%= listing.image.url %>", { size: { w: 20, h: 20 } });
+            
+                    // Create a marker using the previously instantiated icon:
+                    var marker = new H.map.Marker(LocationOfMarker, { icon: pngIcon });
+            
+                    // Add the marker to the map:
+                    map.addObject(marker);
+            
+                    // Optionally, 
+                    //Show the marker in the center of the map
+                    map.setCenter(LocationOfMarker)
+            
+                    //Zooming so that the marker can be clearly visible
+                    map.setZoom(8)
+                </script>
         </body>

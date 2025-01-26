@@ -11,10 +11,8 @@ const listingSchema = new mongoose.Schema({
         type: String,
     },
     image: {
-        type: String,
-        set: function(value) {
-            return value },
-        default: 'https://unsplash.com/photos/a-tree-that-is-standing-in-the-water-rOkiM1oHs3Q' // Default value
+        url : {type : String},
+        filename : {type : String}
     },
     price: {
         type: Number,
@@ -24,6 +22,14 @@ const listingSchema = new mongoose.Schema({
     },
     country: {
         type: String,
+    },
+    cordinate: {
+        longitude : { 
+            type : Number, 
+        },
+        latitude : {
+            type : Number,
+        }
     },
     reviews: [
         {

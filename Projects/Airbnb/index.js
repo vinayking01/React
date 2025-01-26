@@ -12,6 +12,7 @@ const flash  = require('connect-flash')
 const passport = require('passport');
 const LocalStrategy  = require('passport-local');
 const User = require('./Models/user_schema')
+require('dotenv').config();
 
 // Your server code here
 const app = express();
@@ -41,11 +42,11 @@ app.use(session({
     secret: 'Airbnb 123', 
     resave: false,             
     saveUninitialized: true,   
-}));
+    cookie: {
+      maxAge: 2 * 60 * 60 * 1000, // 2 hours in milliseconds
+    }}
+));
 
-app.get('/',(req,res) =>{
-    res.send("hello world");
-})
 
 app.use(passport.initialize())  // a middleware to initialize the passport
 app.use(passport.session());//
@@ -60,10 +61,13 @@ app.use(flash())
 app.use((req,res,next)=>{     
     res.locals.success = req.flash("success"); // this way we provided the success variable to the every template instead of passing in templates like ejs.
     res.locals.failure = req.flash("failure");
-    res.locals.currentUser = req.user; // store the users whose session is currently logged in
+    res.locals.currentUser = req.user || null; // store the users whose session is currently logged in
     next();
 })
 
+app.get('/',(req,res) =>{
+    res.redirect('/listings');
+})
 
 // Listing handling
 app.use('/listings',listings_routes);

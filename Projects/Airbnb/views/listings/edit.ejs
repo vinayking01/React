@@ -4,7 +4,7 @@
 <body>
     <div class="container">
         <h1>Edit Listing</h1>
-        <form action="/listings/<%= listing.id %>?_method=PUT" class="needs-validation" method="POST"  novalidate >
+        <form action="/listings/<%= listing.id %>?_method=PUT" class="needs-validation" method="POST" novalidate enctype="multipart/form-data" >
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" class="form-control" id="title" name="listing[title]" value="<%= listing.title %>" placeholder="Enter the title of your listing" required>
@@ -46,14 +46,24 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Image URL</label>
-                <input type="url" class="form-control" id="image" name="listing[image]" value="<%= listing.image %>" placeholder="Enter a valid image URL (e.g., https://example.com/image.jpg)" >
-                <div class="invalid-feedback">
-                    Please provide a valid image link.
+                <label for="country" class="form-label">country</label>
+                <input type="text" class="form-control" id="country" name="listing[country]" value="<%= listing.country %>" placeholder="Enter the Country" required>
+                <div class="valid-feedback">
+                    Looks good!
                 </div>
                 <div class="invalid-feedback">
-                    Please provide the Description!
+                    Please provide the Country!
                 </div>
+            </div>
+            <div class="mb-3" style="width: 300px; max-height: 300px;">
+                Original Listing Image
+                <!-- What we want here ? _> to preview the old listing image but won't show the high resolution pixel image or suppose we want to show blur image or something else etc then we can perform the chg when retrieving from cloudinary using cloudinary api itself -->
+                <img src="<%= originalImageUrl %>" alt="" srcset=""> 
+            </div>
+            <br></br>
+            <div class="mb-3">
+                <label for="image">Upload Image :</label>
+                <input type="file" id="image" name="image" class="form-control" >
             </div>
             <button type="submit" class="btn btn-primary w-100">Update Listing</button>
         </form>
