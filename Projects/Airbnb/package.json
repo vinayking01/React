@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "v20.10.0"   
+  },
   "name": "airbnb",
   "version": "1.0.0",
   "description": "",

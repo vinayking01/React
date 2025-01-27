@@ -43,7 +43,7 @@ app.engine('ejs', ejsMate);
 const Store = MongoStore.create({
   mongoUrl: DataBaseURL,
   crypto: {
-    secret: "mysupersecret",
+    secret: process.env.SESSION_SECRET || "defaultsecret",
   },
   touchAfter: 24 * 60 * 60, // 1 day
 });
