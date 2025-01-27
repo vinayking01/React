@@ -8,6 +8,7 @@ const listings_routes = require('./routes/listing_routes');
 const reviews_routes = require('./routes/review_routes');
 const user_routes = require('./routes/user_routes')
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const flash  = require('connect-flash')
 const passport = require('passport');
 const LocalStrategy  = require('passport-local');
@@ -18,9 +19,11 @@ require('dotenv').config();
 const app = express();
 
 // Replace with your MongoDB connection string
-const mongoURI = 'mongodb://localhost:27017/Airbnb';
+// const mongoURI = 'mongodb://localhost:27017/Airbnb';
+const DataBaseURL = process.env.ATLAS_DB_URL;
+
 // Connect to MongoDB
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(DataBaseURL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected...'))
     .catch(err => console.log(err));
 
@@ -37,15 +40,33 @@ app.set('views', path.join(__dirname, 'views'));
 // use ejs-locals for all ejs templates:
 app.engine('ejs', ejsMate);
 
+const Store = MongoStore.create({
+  mongoUrl: DataBaseURL,
+  crypto: {
+    secret: "mysupersecret",
+  },
+  touchAfter: 24 * 60 * 60, // 1 day
+});
+
+const SessionDetails = {  
+  store: Store,          
+  secret: process.env.SESSION_SECRET || "defaultsecret", // Use an environment variable or a default value
+  resave: false,             
+  saveUninitialized: true,   
+  cookie: {
+    maxAge: 2 * 60 * 60 * 1000, // 2 hours in milliseconds
+  },
+};
+
+
 // session middleware
-app.use(session({           
-    secret: 'Airbnb 123', 
-    resave: false,             
-    saveUninitialized: true,   
-    cookie: {
-      maxAge: 2 * 60 * 60 * 1000, // 2 hours in milliseconds
-    }}
-));
+// app.use(session(SessionDetails)); // express session is not good for production instead of this we use some other store like mongo etc.
+
+Store.on("error",()=>{
+    console.log("Error in mongo session",err);
+})
+
+app.use(session(SessionDetails));
 
 
 app.use(passport.initialize())  // a middleware to initialize the passport

@@ -1,6 +1,5 @@
 const Listing = require('../Models/listing_schema')
 const Review = require('../Models/review_schema')
-const { initializeMap } = require('../MapConfig')
 const axios = require('axios');
 
 
@@ -52,15 +51,15 @@ module.exports.CreateList = async (req, res, next) => {
     }
     // Construct the full address from the listing item
     const address = `${newListing.location}`;
-    const Link = `https://geocode.search.hereapi.com/v1/geocode?q=country=${newListing.country}&location=${newListing.country}&apiKey=${process.env.HERE_API_KEY}`;
-    console.log(Link)
+    const Link = `https://geocode.search.hereapi.com/v1/geocode?q=location=${newListing.location}&country=${newListing.country}&apiKey=${process.env.HERE_API_KEY}`;
+    // console.log(Link)
     // Geocode the address to get latitude and longitude
     await axios.get(Link).then(response => {
       // Check if the response contains items
       if (response.data.items && response.data.items.length > 0) {
         // Loop through the items (if needed)
         response.data.items.forEach(item => {
-          console.log("Item position:", item.position);
+          // console.log("Item position:", item.position);
 
           // Extract longitude and latitude from the position object
           const long = item.position.lng;
@@ -99,7 +98,7 @@ module.exports.RenderEditListForm = async (req, res, next) => {
     if (!listingItem) throw new Error('Listing not found');
     let originalImageUrl = listingItem.image.url;
     originalImageUrl = originalImageUrl.replace("/upload", "/upload/h_300,w_250")// customizing the cloudinary url to preview in compressing manner
-    console.log(originalImageUrl)
+    // console.log(originalImageUrl)
     req.flash('success', "Listing details updated successfully")
     res.render('listings/edit.ejs', { listing: listingItem, title: `Airbnb: Edit ${listingItem.title}`, originalImageUrl });
   } catch (err) {
@@ -126,16 +125,16 @@ module.exports.UpdateList = async (req, res, next) => {
     // Construct the full address from the listing item
     const address = `${listingItem.location}`;
 
-    // // // Geocode the address to get latitude and longitude
-    const Link = `https://geocode.search.hereapi.com/v1/geocode?q=country=${listingItem.country}&location=${listingItem.country}&apiKey=${process.env.HERE_API_KEY}`;
-    console.log(Link)
+    // Geocode the address to get latitude and longitude
+    const Link = `https://geocode.search.hereapi.com/v1/geocode?q=location=${listingItem.location}&country=${listingItem.country}&apiKey=${process.env.HERE_API_KEY}`;
+    // console.log(Link)
     // Geocode the address to get latitude and longitude
     await axios.get(Link).then(response => {
       // Check if the response contains items
       if (response.data.items && response.data.items.length > 0) {
         // Loop through the items (if needed)
         response.data.items.forEach(item => {
-          console.log("Item position:", item.position);
+          // console.log("Item position:", item.position);
 
           // Extract longitude and latitude from the position object
           const long = item.position.lng;
@@ -147,7 +146,7 @@ module.exports.UpdateList = async (req, res, next) => {
             latitude: lat
           };
 
-          console.log(`Longitude: ${long}, Latitude: ${lat}`);
+          // console.log(`Longitude: ${long}, Latitude: ${lat}`);
         });
       } else {
         console.log("No geocode results found for the provided location.");
