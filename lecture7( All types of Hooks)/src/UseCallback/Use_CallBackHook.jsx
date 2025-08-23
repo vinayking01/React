@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useCallback } from 'react';
 
 const ChildComponent = ({ onIncrement, onReset, count }) => {
   console.log("ChildComponent rendered");
@@ -17,7 +17,9 @@ const UseCallBack_Hook = () => {
 
   // No useCallback, so new function instances are created on every render
   const increment = () => setCount((prev) => prev + 1);
-  const reset = () => setCount(0);
+  const reset = useCallback(() => {
+    setCount(0);
+  }, []);
 
   return (
     <div>

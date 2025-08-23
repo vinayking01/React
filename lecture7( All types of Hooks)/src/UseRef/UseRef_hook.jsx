@@ -36,6 +36,7 @@ export function UseRef_hook() {
 
   useEffect(() => {
     count.current = count.current + 1;
+    console.log("re-rendered",count.current)
   });
 
   return (
@@ -45,7 +46,7 @@ export function UseRef_hook() {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
-      <h1>Render Count: {count.current}</h1>
+      <h1>Render Count: {inputValue}</h1>
     </>
   );
 }

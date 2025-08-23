@@ -9,10 +9,11 @@ import UserCard from './components/UserCard';
 import para from './para.module.css'  // module css imported
 import styled from 'styled-components';
 
-const Container = styled.div`
+const Container = styled.div`  
   font-size: 24px;
   color : green;
-`;
+`; //styled.div → This tells styled-components to create a div element and wrap inside it and then apply this written css.
+
 
 
 function App() {

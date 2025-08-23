@@ -1,37 +1,5 @@
-## Installation 
-1. We can create react app installation in 2 ways.
 
-    (a) using npx - node package executer
-    ```
-    1. command  -> npx create-react-app myapp.
-    2. it executes the package without installing on your computer .
-    3. npx downloads and runs the package temporarily, avoiding permanent installation.
-
-    ```
-    (b) using npm -
-    ```
-    1. command - npm create react-app my-app. 
-    2.  it downloads the packages
-    ```
-    Note - using another way is package bundler vite ,etc. 
-    vite - # Create a new Vite project
-            npm create vite@latest
-    
-    to Run the the project - npm start
-
-### Reactjs / React
-
-1. it is a javascript library for building user Interface.
-2. it is not a framework.
-3. it is designed by Jordan Walke.
-4. first used in fb news feed. created by facebook.
-5. It is based on component based approach
-6. It allows to create Reuseable UI components.
-3. Declarative approach.
-4. More scalable.
-
-
-## Folder Structure of React app - Standardize structure
+## Folder Structure of React app - Standardize structure when create through create_react-app , webpack etc. ( just few changes in structure happen)
 ```
 my-app/
 ├── README.md            // Information about your project, setup instructions, and usage details.
@@ -68,8 +36,3 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.

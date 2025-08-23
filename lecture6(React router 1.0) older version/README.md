@@ -9,14 +9,15 @@
 8. This code is the Older version of React Router which does not support data API. 
 
 ## Workflow
-    ```
+    ``` js
+    
     [Click "Home"] -> [URL changes to /home] -> [BrowserRouter matches /home] -> [Renders Home component]
 
     ```
 
 
 ### Syntax
-    ```
+    ``` js
         // Navigation Component
     import { Link } from 'react-router-dom';
 

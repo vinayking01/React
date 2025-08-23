@@ -1,0 +1,107 @@
+{
+  "status": "success",
+  "data": {
+    "dishes": [
+      {
+        "id": 1,
+        "name": "Paneer Tikka",
+        "description": "Grilled cottage cheese cubes marinated in spices.",
+        "imageUrl": "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/8b6439e482eb9b2d5da0460d61fa07bf",
+        "price": 179,
+        "veg": true,
+        "isPromoted": true,
+        "rating": 4.4
+      },
+      {
+        "id": 2,
+        "name": "Chole Bhature",
+        "description": "Spicy chickpeas served with deep-fried bread.",
+        "imageUrl": "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/rxrcblqo6hyz9kwsj5wk",
+        "price": 129,
+        "veg": true,
+        "isPromoted": true,
+        "rating": 4.3
+      },
+      {
+        "id": 3,
+        "name": "Chicken Biryani",
+        "description": "Aromatic basmati rice with tender chicken pieces.",
+        "imageUrl": "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/emqg9lz1dc5te6r6ztar",
+        "price": 199,
+        "veg": false,
+        "isPromoted": false,
+        "rating": 4.5
+      },
+      {
+        "id": 4,
+        "name": "Veg Hakka Noodles",
+        "description": "Stir-fried noodles with vegetables and sauces.",
+        "imageUrl": "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/mxcp5g3zh7hvqfyd8ntt",
+        "price": 109,
+        "veg": true,
+        "isPromoted": true,
+        "rating": 4.2
+      },
+      {
+        "id": 5,
+        "name": "Egg Curry",
+        "description": "Boiled eggs in a spicy onion-tomato gravy.",
+        "imageUrl": "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/sv2kbt8zjhe0xsgn4qdh",
+        "price": 139,
+        "veg": false,
+         "isPromoted": false,
+        "rating": 4.1
+      },
+      {
+        "id": 6,
+        "name": "Masala Dosa",
+        "description": "Crispy dosa filled with spiced mashed potatoes.",
+        "imageUrl": "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/w3vw5p8r5r3m4xeu9tjy",
+        "price": 99,
+        "veg": true,
+         "isPromoted": false,
+        "rating": 4.4
+      },
+      {
+        "id": 7,
+        "name": "Mutton Rogan Josh",
+        "description": "Slow-cooked lamb in a rich Kashmiri gravy.",
+        "imageUrl": "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/ebvfea1dkayrvefk2r2y",
+        "price": 269,
+        "veg": false,
+         "isPromoted": false,
+        "rating": 4.7
+      },
+      {
+        "id": 8,
+        "name": "Classic Caesar Salad",
+        "description": "Fresh lettuce, croutons & parmesan tossed in dressing.",
+        "imageUrl": "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/ruugrygqsmwuqchbpfae",
+        "price": 159,
+        "veg": true,
+        "isPromoted": true,
+        "rating": 4.0
+      },
+      {
+        "id": 9,
+        "name": "Avocado Burger",
+        "description": "Juicy patty, creamy avocado, fresh veggies and sauce.",
+        "imageUrl": "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/h5ncfp6jpy0m0pzibssg",
+        "price": 189,
+        "veg": true,
+         "isPromoted": true,
+        "rating": 4.2
+      },
+      {
+        "id": 10,
+        "name": "Chocolate Brownie",
+        "description": "Rich chocolate brownie with a gooey centre.",
+        "imageUrl": "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/h5ncfp6jpy0m0pzibssg",
+        "price": 89,
+        "veg": true,
+         "isPromoted": false,
+        "rating": 4.8
+      }
+    ]
+  }
+}

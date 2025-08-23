@@ -51,6 +51,23 @@ function App() {
     <h1>Event Propogation </h1>
     <EventPropagationExample />
     </div>
+
+    <div>
+      <button onClick={()=> {
+        async function Data()
+        {
+          // const res = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.5759152&lng=77.35734479999999&collection=83631&tags=layout_CCS_Pizza&sortBy=&filters=&type=rcv2&offset=0&page_type=null')   // ❌
+
+          const res = await fetch('https://proxy.corsfix.com/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.5759152&lng=77.35734479999999&collection=83631&tags=layout_CCS_Pizza&sortBy=&filters=&type=rcv2&offset=0&page_type=null');   // ✅ 
+
+          const data = await res.json();
+
+          console.log(data);
+        }
+        
+        Data();
+      }}> click to fetch data </button>
+    </div>
     </>
   )
 } 

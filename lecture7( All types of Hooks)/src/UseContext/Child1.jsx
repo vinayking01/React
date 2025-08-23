@@ -1,11 +1,11 @@
 
-import { Component3 } from "./Child3";
+import { Child2 } from "./Child2";
 
-export function Component2() {
+export function Child1() {
     return (
       <>
-        <h1>Component 2</h1>
-        <Component3 />
+        <h1>Child 2</h1>
+        <Child2 />
       </>
     );
   }

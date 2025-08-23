@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>React CDN Example</title>
+</head>
+<body>
+  <!-- This is the root DOM node where we will mount our React app -->
+  <div id="root">
+    <h1>This is the heading</h1>
+    <!-- A second container where we'll render another React element -->
+    <div id="box"></div>
+  </div>
+
+  <!-- Injecting React and ReactDOM via CDN (React 18) without creating full environment -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+  <script>
+    // Create a simple React element using React.createElement
+    const heading = React.createElement('h1',{},'Hi, I Welcome You');
+
+    // Log the React element to see its structure (it's just a JS object)
+    console.log(heading);
+
+    // Create a root for the main #root div using React 18's createRoot
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+
+    // Render the heading element inside the #root container
+    // Note: The original <h1> in the HTML will be replaced by this render
+    // root.render(heading);
+
+    /*
+      In React versions before 18, we would use:
+        ReactDOM.render(heading, document.getElementById('root'));
+      But that method is now deprecated. React 18 introduced createRoot() 
+      for enabling concurrent features and better performance.
+    */
+
+    // Example of a nested React structure created without JSX
+    const parent = React.createElement('div',{ id: 'parent' },
+    React.createElement('h2',{},React.createElement('span',{}, 'This is a span inside h2')),
+    React.createElement('p',{},'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.')
+    );
+
+    // Create another root for the #box div
+    const box = ReactDOM.createRoot(document.getElementById('box'));
+
+    // Render the nested parent structure inside #box
+    box.render(parent);
+
+    /*
+      Writing deeply nested elements with React.createElement() can get hard to read and write. That's why JSX was introduced — 
+      it looks more like HTML and makes code much cleaner and readable.
+    */
+
+  </script>
+</body>
+</html>

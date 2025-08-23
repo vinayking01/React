@@ -1,18 +1,31 @@
 
-import { useState, createContext, useContext } from "react";
-import { Component2} from "./Child2";
+import { useState, createContext} from "react";
+import { Child1} from "./Child1";
+import {SiblingChild1} from "./SiblingChild"
+import {SiblingChild2} from "./SiblingChild"
 
-const UserContext = createContext();   //1. To create context, you must Import createContext and initialize it:
+const UserContext = createContext({name : "Anonymous" , age: "32"});   //1. To create context, you must Import createContext and initialize it, By default you can give some value to the context.
 
- function UseContext_hook() {
-  const [user, setUser] = useState("Jesse Hall");
+function UseContext_hook() {
+  const [user, setUser] = useState({ name: "Jessi", age : 25 , gender : "female"});
 
   return (
-    <UserContext.Provider value={user}>  {/*2. Wrap child components in the Context Provider and supply the state value.*/}
-      <h1>{`Hello ${user}!`}</h1>
-      <Component2 />
+    <>
+     <UserContext.Provider value={{user, setUser}}>  
+       {/* 2. Wrap child components in the Context Provider and supply the state value or any value u wanna share . */}
+      <h1>{`Hello ${user.name}! Welcome back`}</h1>
+      <Child1 />
     </UserContext.Provider>
+    <SiblingChild1/>
+    <SiblingChild2/>
+    
+    </>
   );
 }
 
 export {UserContext,UseContext_hook};
+
+
+//1. Default Value vs. Updated Value
+// - If you call useContext(UserContext) outside of any provider, you'll get the default value passed to createContext(defaultValue).
+// - If you call useContext(UserContext) inside a provider, you'll get the current provider's value

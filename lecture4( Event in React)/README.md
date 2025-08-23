@@ -4,7 +4,7 @@
 2. In React, event handlers receive the event object as an argument by default.This event object contains information about the event, such as the type of event, the target element, and more. However, when you use an arrow function directly in the onClick attribute without passing the event explicitly, React doesn't pass the event object to your handler function. This is because the arrow function creates a new function and calls your handler without passing any arguments. 
 
     ### Syntax
-    ```
+    ``` js
     const handleButtonClick4 = (event) => 
     {
     console.log(event);
@@ -18,7 +18,7 @@
 
 ## (a) Passing Events as Props
 1. Passing event handlers as props in React.js is a common pattern used to allow child components to communicate with parent components.
-```
+``` js 
 - parent.jsx
 
 function Click_btn()
@@ -33,7 +33,7 @@ function Click_btn()
 </div>
 
 ```
-```
+```js
 - child.jsx
 
 return (
@@ -43,15 +43,15 @@ return (
     )
 ```
 
-## (B) Event Propogation
+## (B) Event Propagation
 1. Event propagation in React follows the same principles as in the DOM, consisting of three phases:
 2. Capturing Phase: The event starts from the root of the document and propagates down to the target element. (use OnClickCapture = {event1})
 3. Bubbling Phase: The event bubbles up from the target element to the root of the document. ( use OnClick = {event1})
 4. Stopping Propagation: You can stop the event from propagating further using event.stopPropagation().
 
     ### Syntax
-    ```
-
+    ```js
+ 
     const EventPropagationExample = () => {
     const Parent = (event) => {
         console.log('Parent clicked');
