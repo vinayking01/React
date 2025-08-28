@@ -64,8 +64,8 @@ ex - const userCount = user.length ;
 ## Q: What is `Reconciliation` in React?
 
 - `Reconciliation` is the process through which React updates the Browser DOM and makes React work faster. React use a `diffing algorithm` so that component updates are predictable and faster. React would first calculate the difference between the real DOM and the copy of DOM (Virtual DOM) when there's an update of components.
-- React stores a copy of Browser DOM which is called `Virtual DOM`. When we make changes or add data, React creates a new Virtual DOM and compares it with the previous one. Comparison is done by `Diffing Algorithm`.
-- React compares the Virtual DOM with Real DOM. It finds out the changed nodes and updates only the changed nodes in Real DOM leaving the rest nodes as it is. This process is called Reconciliation.
+- React stores a copy of Browser DOM which is called `Virtual DOM`. When we make changes or add data, React creates a new Virtual DOM and compares it with the previous one (old virtual DOM). Comparison is done by `Diffing Algorithm`.
+- Based on the diff, React calculates the minimal set of changes needed and efficiently updates only those parts of the real DOM that have changed, instead of re-rendering the entire DOM. This process is called Reconciliation. Commit phase: Finally, React applies these specific changes to the real DOM in the browser.
 
                                  (or)
 

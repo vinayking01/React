@@ -18,7 +18,7 @@ function App() {
   // const onHandler = (event)=>{
   //   setName(event.target.value)
   // }
-  console.log("Jai aur veru")
+ 
   return (
     <>
      {/* 1. useState Hook  */}
@@ -28,13 +28,13 @@ function App() {
      {/* <UseEffect_hook /> */}
 
      {/* UseContext Hook */}
-      {/* <UseContext_hook /> */}
+      <UseContext_hook />
 
       {/* UseRef Hook */}
-      <UseRef_hook />
+      {/* <UseRef_hook /> */}
 
       {/* ForwardRef Hook */}
-      < ForwardRef_Hook />
+      {/* < ForwardRef_Hook /> */}
 
       {/* UseReducer_Hook  */}
       {/* <UseReducer_hook /> */}

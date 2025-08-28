@@ -24,10 +24,10 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      'https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.624480699999999&page_type=DESKTOP_WEB_LISTING'
+      'https://proxy.corsfix.com/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.624480699999999&page_type=DESKTOP_WEB_LISTING'
     );
-
-    const json = await data.json();
+    const json = await data?.json();
+    console.log(json?.data?.cards);
 
     // console.log(json);
     // * optional chaining
@@ -47,7 +47,7 @@ const Body = () => {
 
   const { loggedInUser, setUserName } = useContext(UserContext);
 
-  return listOfRestaurants.length === 0 ? (
+  return listOfRestaurants?.length === 0 ? (
     <Loader />
   ) : (
     <div className="body">
@@ -114,7 +114,7 @@ const Body = () => {
       <div className="flex flex-wrap justify-center">
         {/* // * looping through the <RestaurentCard /> components Using Array.map() method */}
 
-        {filteredRestaurant.map((restaurant) => (
+        {filteredRestaurant?.map((restaurant) => (
           <Link
             style={{
               textDecoration: 'none',

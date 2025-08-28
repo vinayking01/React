@@ -116,6 +116,8 @@ const userSlice = createSlice({
 
 
 ## Q: Redux State & Immutability: Complete Understanding why redux follow the principle of immutability in their State.
+- Immutability means you do not mutate existing objects but create new objects representing updated state.
+
 1.  Where & How Redux Stores State
   - Redux holds your application state values in a single immutable store object.
   - This store is the source of truth, accessed by components to render UI.
@@ -133,8 +135,8 @@ const userSlice = createSlice({
   }})
   ```
 2. Example of Breaking Immutability (Incorrect)
-  -   Suppose you have the state which stored the object like {value : 0 , name :"Avi}. Now you when you perform the increment operation you do (state) => { state.value += 1; } , which actually increases the value but object reference remain same. It looks like same under the hood if redux-toolkit won't handle this issue this can cause serious problem because the actual reference of object is remain same and react thinks nothing have changed and won't re-render. But luckily redux handle this internally. 
-  - vProblem: Redux will not detect this change because the object reference is the same.
+  -   Suppose you have the state which stored the object like {value : 0 , name :"Avi}. Now you when you perform the increment operation you do (state) => { state.value += 1; } , which actually increases the value but object reference remain same. It looks like you are only changing value . Looks same under the hood if redux-toolkit won't handle this issue, this can cause serious problem because the actual reference of object is remain same and react thinks nothing have changed and won't re-render. But luckily redux handle this internally. 
+  - `Problem`: Redux will not detect this change because the object reference is the same.
 
 3. Example of Following Immutability (Correct)
 

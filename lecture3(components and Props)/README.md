@@ -243,7 +243,7 @@ While CSS Modules scope **class-based styles** to a component, **IDs (`#id`) and
 ```css
 /* styles.module.css */
 h1 {
-  color: red; /* Affects all <h1> tags globally */
+  color: red; /* Affects all <h1> tags globally because this is treated as global then not even required to write and this line will act as soon as u just import this css file */ 
 }
 ```
 #### **Correct (Scoped Effect)**

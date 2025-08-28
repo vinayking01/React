@@ -15,8 +15,8 @@ function UseContext_hook() {
        {/* 2. Wrap child components in the Context Provider and supply the state value or any value u wanna share . */}
       <h1>{`Hello ${user.name}! Welcome back`}</h1>
       <Child1 />
-    </UserContext.Provider>
     <SiblingChild1/>
+    </UserContext.Provider>
     <SiblingChild2/>
     
     </>
@@ -27,5 +27,5 @@ export {UserContext,UseContext_hook};
 
 
 //1. Default Value vs. Updated Value
-// - If you call useContext(UserContext) outside of any provider, you'll get the default value passed to createContext(defaultValue).
+// - If you call useContext(UserContext) in a component within the same program where UserContext is created, but that component is not wrapped inside a corresponding <UserContext.Provider>, then React will return the default value passed to createContext(defaultValue).
 // - If you call useContext(UserContext) inside a provider, you'll get the current provider's value

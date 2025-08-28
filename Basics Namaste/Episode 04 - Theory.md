@@ -33,8 +33,8 @@ With a `microservices architecture`, an application is built as independent comp
 Open the browser’s Developer Tools → Network tab, then perform an action on the website. API requests will appear in the network list — you can inspect them to see the API URLs, request methods, and responses.
 
 ## Q: What are the two main approaches to rendering data from APIs?
-Fetch first, then render — Wait for the API data, then render the UI.
-Skeleton first, then data — Render a placeholder/skeleton UI immediately, then re-render with actual data when it arrives (better user experience, Mostly used now a days).
+- Fetch first, then render — Wait for the API data, then render the UI.
+- Skeleton first, then data — Render a placeholder/skeleton UI immediately, then re-render with actual data when it arrives (better user experience, Mostly used now a days).
 
 ## Q: What is `Shimmer UI`?
 

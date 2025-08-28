@@ -1,7 +1,7 @@
 
 import { Link, NavLink } from 'react-router-dom';  // you can use anyone either link or Navlink but there is Navlink has one additional advantage is we can perform the styling 
 
-export default function Navbar() {
+export default function Navbar() { 
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -12,10 +12,10 @@ export default function Navbar() {
                                 <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/contact">Contact</Link>
+                                 <NavLink className="nav-link " aria-current="page" to="/contact">Contact</NavLink>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/about">About</Link>
+                            <NavLink style={({ isActive }) => {return isActive ? { color: "plum" } : {};}} className="nav-link active" aria-current="page" to="/about">About</NavLink>
                             </li>
                         </ul>
                         <form className="d-flex" role="search">

@@ -104,7 +104,7 @@ this.state = {
 
 - To change a value in the state object, use the this.setState() method.
 - When a value in the state object changes, the component will re-render, meaning that the output will change according to the new value(s).
-- Merges new state into existing state (does not replace the whole object).
+- Merges new state into existing state (does not replace the whole object). It shallow merges the partial state update into the existing state object automatically. This means: updates only the count field, keeping other state properties like name intact.
 
 ```jsx
 // Never modify state directly:
@@ -306,8 +306,8 @@ inside Child 2 useEffect
 inside Parent useEffect
 
 ```
-:---------------------------------------------------------------------------------------:
-Class Based component
+::
+`Class Based component`
 
 ```js
 0
